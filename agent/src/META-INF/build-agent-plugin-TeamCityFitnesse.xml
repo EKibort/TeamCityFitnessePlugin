@@ -13,5 +13,8 @@
   <bean id="TeamCityFitnesseRunnerAgentBuildRunnerInfo" class="Fitnesse.agent.FitnesseRunnerAgentBuildRunnerInfo"/>
   <bean id="TeamCityFitnesseRunnerBuildServiceAdapter" class="Fitnesse.agent.FitnesseRunnerBuildServiceAdapter"/>
   <bean id="TeamCityFitnesseRunnerCommandLineBuildServiceFactory" class="Fitnesse.agent.FitnesseRunnerCommandLineBuildServiceFactory"/>
+  <bean id="TeamCityFitnesseProcessListenerAdapter" class="Fitnesse.agent.FitnesseProcessListenerAdapter"/>
+
+
 
 </beans>

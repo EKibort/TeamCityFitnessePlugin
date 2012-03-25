@@ -21,12 +21,22 @@ import jetbrains.buildServer.agent.runner.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class FitnesseRunnerBuildServiceAdapter extends BuildServiceAdapter{
 
     @NotNull
     @Override
     public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
-        return super.createProgramCommandline("cmd.exe", Arrays.asList("/c" "echo \"I fot it!\""));
+        return super.createProgramCommandline("cmd.exe", Arrays.asList("/c", "echo \"I fot it!\""));
+    }
+
+    @NotNull
+    @Override
+    public List<ProcessListener> getListeners() {
+        return Arrays.<ProcessListener>asList(
+                    new LoggingProcessListener(this.getLogger()),
+                    new FitnesseProcessListenerAdapter());
     }
 }
