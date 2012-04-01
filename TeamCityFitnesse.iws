@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="f86a6310-ec63-4ac2-bc38-7c9594f15102" name="Default" comment="" />
+    <list default="true" id="f86a6310-ec63-4ac2-bc38-7c9594f15102" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FutureBasedBuildProcess.java" />
+      <change type="DELETED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\AgentListener.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\FitnesseProcessListenerAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\FitnesseRunnerBuildServiceAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\FitnesseRunnerCommandLineBuildServiceFactory.java" afterPath="" />
+      <change type="MOVED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\FitnesseRunnerAgentBuildRunnerInfo.java" afterPath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TeamCityFitnesse.iml" afterPath="$PROJECT_DIR$/TeamCityFitnesse.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TeamCityFitnesse.ipr" afterPath="$PROJECT_DIR$/TeamCityFitnesse.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TeamCityFitnesse.iws" afterPath="$PROJECT_DIR$/TeamCityFitnesse.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/agent/Fitnesse-agent.iml" afterPath="$PROJECT_DIR$/agent/Fitnesse-agent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml" afterPath="$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.properties" afterPath="$PROJECT_DIR$/build.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/Fitnesse-common.iml" afterPath="$PROJECT_DIR$/common/Fitnesse-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/Fitnesse/common/Util.java" afterPath="$PROJECT_DIR$/common/src/Fitnesse/common/Util.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/Fitnesse-server.iml" afterPath="$PROJECT_DIR$/server/Fitnesse-server.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/resources/buildServerResources/Fitnesse.jsp" afterPath="$PROJECT_DIR$/server/resources/buildServerResources/Fitnesse.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/resources/buildServerResources/editFitnesse.jsp" afterPath="$PROJECT_DIR$/server/resources/buildServerResources/editFitnesse.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/resources/buildServerResources/viewFitnesse.jsp" afterPath="$PROJECT_DIR$/server/resources/buildServerResources/viewFitnesse.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/Fitnesse/server/Controller.java" afterPath="$PROJECT_DIR$/server/src/Fitnesse/server/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/Fitnesse/server/FitnessePropertiesProcessor.java" afterPath="$PROJECT_DIR$/server/src/Fitnesse/server/FitnessePropertiesProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/Fitnesse/server/FitnesseRunType.java" afterPath="$PROJECT_DIR$/server/src/Fitnesse/server/FitnesseRunType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/Fitnesse/server/ServerListener.java" afterPath="$PROJECT_DIR$/server/src/Fitnesse/server/ServerListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamcity-common.xml" afterPath="$PROJECT_DIR$/teamcity-common.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamcity-plugin.xml" afterPath="$PROJECT_DIR$/teamcity-plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamcityfitnesse.xml" afterPath="$PROJECT_DIR$/teamcityfitnesse.xml" />
+    </list>
     <ignored path="TeamCityFitnesse.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,69 +87,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProcessListener.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/ProcessListener.java">
+      <file leaf-file-name="Runtime.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/lang/Runtime.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="32" selection-start="936" selection-end="951" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BuildServiceAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/BuildServiceAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="61" selection-start="1271" selection-end="1271" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandLineBuildService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/CommandLineBuildService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="44" selection-start="7067" selection-end="7075" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FitnesseRunnerBuildServiceAdapter.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerBuildServiceAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="11" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.4827586">
+            <state line="775" column="42" selection-start="32320" selection-end="32320" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#1235#1252#0" expanded="true" />
+                <element signature="e#0#37018#0" expanded="false" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FitnesseRunnerCommandLineBuildServiceFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerCommandLineBuildServiceFactory.java">
+      <file leaf-file-name="FitnesseRunner.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="13" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0">
+            <state line="24" column="13" selection-start="799" selection-end="799" vertical-scroll-proportion="0.18478261">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AgentListener.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/AgentListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="66" selection-start="652" selection-end="714" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FitnesseProcessListenerAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcessListenerAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="43" selection-start="993" selection-end="1023" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -128,26 +111,74 @@
       <file leaf-file-name="build-agent-plugin-TeamCityFitnesse.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="2" selection-start="1479" selection-end="1479" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FitnesseRunnerAgentBuildRunnerInfo.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerAgentBuildRunnerInfo.java">
+      <file leaf-file-name="FitnesseProcess.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="13" selection-start="830" selection-end="830" vertical-scroll-proportion="0.0">
+            <state line="109" column="39" selection-start="3288" selection-end="3288" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProcessListenerAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/ProcessListenerAdapter.java">
+      <file leaf-file-name="Controller.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="0" selection-start="1064" selection-end="1236" vertical-scroll-proportion="0.0">
+            <state line="15" column="13" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FitnessePropertiesProcessor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/FitnessePropertiesProcessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="13" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Util.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/src/Fitnesse/common/Util.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="13" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FitnesseRunType.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/FitnesseRunType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="13" selection-start="1080" selection-end="1080" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerListener.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/ServerListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="13" selection-start="421" selection-end="421" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AgentBuildSettings.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/AgentBuildSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="218" column="2" selection-start="5328" selection-end="5346" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#6003#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,15 +191,12 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
-    <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
-    <option name="UPDATE_CHANGES_POLICY" value="STASH" />
     <option name="LINE_SEPARATORS_CONVERSION" value="ASK" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/common/src/TeamCityFitnesse/common/Util.java" />
-        <option value="$PROJECT_DIR$/agent/src/TeamCityFitnesse/agent/FitnesseRunnerAgentBuildRunnerInfo.java" />
         <option value="$PROJECT_DIR$/agent/src/TeamCityFitnesse/agent/FitnesseRunner.java" />
         <option value="$PROJECT_DIR$/agent/src/TeamCityFitnesse/agent/FitnesseRunnerBuildServiceAdapter.java" />
         <option value="$PROJECT_DIR$/server/src/TeamCityFitnesse/server/FitnessePropertiesProcessor.java" />
@@ -176,17 +204,26 @@
         <option value="$PROJECT_DIR$/server/src/TeamCityFitnesse/server/FitnesseRunType.java" />
         <option value="$PROJECT_DIR$/server/src/META-INF/build-server-plugin-TeamCityFitnesse.xml" />
         <option value="$PROJECT_DIR$/server/src/Fitnesse/server/Controller.java" />
-        <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcessListenerAdapter.java" />
-        <option value="$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml" />
         <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerBuildServiceAdapter.java" />
+        <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerCommandLineBuildServiceFactory.java" />
+        <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcessListenerAdapter.java" />
+        <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseBuildProcessAdapter.java" />
+        <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerAgentBuildRunnerInfo.java" />
+        <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FutureBasedBuildProcess.java" />
+        <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java" />
+        <option value="$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml" />
+        <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java" />
       </list>
     </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="#JAVA_INTERNAL" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1296" />
-    <option name="height" value="1000" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -204,7 +241,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -230,7 +267,26 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeamCityFitnesse" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -238,10 +294,6 @@
               <option name="myItemId" value="TeamCityFitnesse" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -249,15 +301,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TeamCity Open API agent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="agent-api.jar" />
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -267,19 +311,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TeamCity Open API agent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="agent-api.jar" />
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="agent" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -289,23 +325,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TeamCity Open API agent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="agent-api.jar" />
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="agent" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="runner" />
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -313,6 +341,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="TeamCityFitnesse" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeamCityFitnesse" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -363,7 +413,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -373,14 +422,14 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="preferences.sourceCode" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -403,6 +452,24 @@
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
@@ -431,24 +498,6 @@
       <envs />
       <properties />
       <listeners />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -507,7 +556,7 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -535,26 +584,27 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32936978" sideWeight="0.5166531" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.5291288" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32936978" sideWeight="0.47766045" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.4671299" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24857838" sideWeight="0.6706302" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15018706" sideWeight="0.6707589" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1902497" sideWeight="0.4939074" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18973215" sideWeight="0.49171567" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -592,7 +642,10 @@
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
     <option name="LAST_COMMIT_MESSAGE" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -646,121 +699,138 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/LogLastLinesProcessListener.java">
+    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/TCLineReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="36" selection-start="2043" selection-end="2043" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/MultiCommandBuildSession.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="210" selection-end="210" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/MultiCommandBuildSessionFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="17" selection-start="316" selection-end="316" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/ProgramCommandLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="17" selection-start="864" selection-end="864" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/SimpleProgramCommandLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="13" selection-start="1419" selection-end="1419" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/TerminationAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="12" selection-start="723" selection-end="723" vertical-scroll-proportion="0.0">
+        <state line="23" column="13" selection-start="779" selection-end="779" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#962#0" expanded="false" />
+            <element signature="e#0#3600#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/ProcessListener.java">
+    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/ThreadUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="32" selection-start="936" selection-end="951" vertical-scroll-proportion="0.0">
+        <state line="28" column="13" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#2135#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="13" selection-start="931" selection-end="931" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#3184#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/Win32RegistryAccessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="17" selection-start="890" selection-end="890" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#2845#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/SimpleExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="13" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#794#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/RunCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="35" selection-start="1418" selection-end="1418" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#2780#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/lang/Runtime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="775" column="42" selection-start="32320" selection-end="32320" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#37018#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/AgentBuildSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="218" column="2" selection-start="5328" selection-end="5346" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#6003#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="39" selection-start="3288" selection-end="3288" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/ProcessListenerAdapter.java">
+    <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/FitnesseRunType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1064" selection-end="1236" vertical-scroll-proportion="0.0">
+        <state line="34" column="13" selection-start="1080" selection-end="1080" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerAgentBuildRunnerInfo.java">
+    <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/ServerListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="13" selection-start="830" selection-end="830" vertical-scroll-proportion="0.0">
+        <state line="13" column="13" selection-start="421" selection-end="421" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerCommandLineBuildServiceFactory.java">
+    <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0">
+        <state line="15" column="13" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/FitnessePropertiesProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="13" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/Fitnesse/common/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="13" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="2" selection-start="1479" selection-end="1479" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/CommandLineBuildService.java">
+    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="44" selection-start="7067" selection-end="7075" vertical-scroll-proportion="0.0">
+        <state line="24" column="13" selection-start="799" selection-end="799" vertical-scroll-proportion="0.18478261">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/runner/BuildServiceAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="61" selection-start="1271" selection-end="1271" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/AgentListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="66" selection-start="652" selection-end="714" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcessListenerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="43" selection-start="993" selection-end="1023" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerBuildServiceAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="11" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.4827586">
-          <folding>
-            <element signature="e#1235#1252#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -828,7 +898,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>TeamCityFitnesse-server</last-edited>
+          <last-edited>Fitnesse-server</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -9,12 +9,5 @@
                            http://www.springframework.org/schema/lang/spring-lang-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        default-autowire="constructor">
 
-  <bean id="TeamCityFitnesseAgentListener" class="Fitnesse.agent.AgentListener"/>
-  <bean id="TeamCityFitnesseRunnerAgentBuildRunnerInfo" class="Fitnesse.agent.FitnesseRunnerAgentBuildRunnerInfo"/>
-  <bean id="TeamCityFitnesseRunnerBuildServiceAdapter" class="Fitnesse.agent.FitnesseRunnerBuildServiceAdapter"/>
-  <bean id="TeamCityFitnesseRunnerCommandLineBuildServiceFactory" class="Fitnesse.agent.FitnesseRunnerCommandLineBuildServiceFactory"/>
-  <bean id="TeamCityFitnesseProcessListenerAdapter" class="Fitnesse.agent.FitnesseProcessListenerAdapter"/>
-
-
-
+  <bean id="TeamCityFitnesseRunner" class="Fitnesse.agent.FitnesseRunner"/>
 </beans>
