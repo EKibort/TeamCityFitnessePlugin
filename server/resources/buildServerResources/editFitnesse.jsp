@@ -1,7 +1,3 @@
-<%--
- * Copyright (c) 2008 Oliver Jones.  See LICENSE file for details.
---%>
-
 <%@ taglib prefix="props" tagdir="/WEB-INF/tags/props" %>
 <%@ taglib prefix="forms" tagdir="/WEB-INF/tags/forms" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
@@ -11,10 +7,44 @@
 
 <l:settingsGroup title="Fitnesse options">
  
-  <tr>   
-      <th><label for="fit.project" Fitnesse path: <span class="mandatoryAsterix" title="Mandatory field">*</span></label></th>
-    <td>
-        <props:textProperty name="fit.project" className="longField" />
-    </td>
-  </tr>
+    <tr>
+        <th>
+            <label for="fitnesseJarPath">Fitnesse: </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseJarPath" />
+            <span class="error" id="error_fitnesseJarPath"></span>
+            <span class="smallNote">c:\FTTNESSE\fitnesse.jar</span>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <label for="fitnessePort">Port: </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnessePort" />
+            <span class="error" id="error_fitnessePort"></span>
+            <span class="smallNote">8080</span>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <label for="fitnesseResult">Result xml: </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseResult" />
+            <span class="error" id="error_fitnesseResult"></span>
+            <span class="smallNote">fitresult.xml</span>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <label for="fitnesseTest">Test or suite relative url </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseTest" />
+            <span class="error" id="error_fitnesseTest"></span>
+            <span class="smallNote">TestSuite.SubSuite</span>
+        </td>
+    </tr>
 </l:settingsGroup>

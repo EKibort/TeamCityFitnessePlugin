@@ -1,19 +1,3 @@
-/*
- * Copyright 2000-2012 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package Fitnesse.agent;
 
 import com.intellij.execution.util.EnvironmentVariable;
@@ -24,9 +8,10 @@ import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.agent.BuildRunnerContext;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 
 /**
  * Created with IntelliJ IDEA.
@@ -58,18 +43,28 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return result;
     }
 
-    private String[] getFitnesseCmd()
+    private String getFitnesseRoot()
     {
-        File jarFitnesse = new File("D:\\WORK\\fitnesse\\fitnesse.jar");
-        File rootFitnesse = new File(jarFitnesse.getParent());
+        File jarFitnesse = new File(getParameter("fitnesseJarPath"));
+        return jarFitnesse.getParent();
+    }
 
-        String[] result =
+
+
+    private String getFitnesseCmd()
+    {
+        File jarFitnesse = new File(getParameter("fitnesseJarPath"));
+        //File rootFitnesse = new File(jarFitnesse.getParent());
+
+        /*String[] result =
                 {"java",
                  "-jar",jarFitnesse.getAbsolutePath(),
-                 "-d", rootFitnesse.getAbsolutePath() , //TODO Adbs path
-                 "-r", "FitNesseRoot",
-                 "-p", "8081",
-        };
+                 //"-d", rootFitnesse.getAbsolutePath() , //TODO Adbs path
+                 //"-r", "FitNesseRoot",
+                 "-p", getParameter("fitnessePort"),
+        };*/
+
+        String  result = String.format("java -jar %s  -p %s",jarFitnesse.getAbsolutePath(), getParameter("fitnessePort"));
 
         return result;
     }
@@ -78,10 +73,11 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     {
         try
         {
-            String[] cmdFitnesse = getFitnesseCmd();
-            File rootFitnesse = new File("D:\\WORK\\fitnesse");
+            String cmdFitnesse = getFitnesseCmd();
+            String rootFolder = getFitnesseRoot();
+            Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'",cmdFitnesse, rootFolder));
 
-            return Runtime.getRuntime().exec(cmdFitnesse);
+            return Runtime.getRuntime().exec(cmdFitnesse, null, new File(rootFolder));
         }
         catch (IOException e) {
             Logger.exception(e);
@@ -89,6 +85,78 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return null;
     }
 
+
+    public byte[] getHttpBytes(URL pageCmdTarget) {
+        InputStream inputStream = null;
+        ByteArrayOutputStream bucket = new ByteArrayOutputStream();
+
+        try {
+            Logger.progressMessage("Connnecting to " + pageCmdTarget);
+            HttpURLConnection connection = (HttpURLConnection) pageCmdTarget.openConnection();
+            Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
+
+            inputStream = connection.getInputStream();
+            long recvd = 0, lastLogged = 0;
+            byte[] buf = new byte[4096];
+            int lastRead;
+            while ((lastRead = inputStream.read(buf)) > 0) {
+                bucket.write(buf, 0, lastRead);
+                //timeout.reset();
+                recvd += lastRead;
+                if (recvd - lastLogged > 1024) {
+                    Logger.progressMessage(recvd / 1024 + "k...");
+                    lastLogged = recvd;
+                }
+            }
+        } catch (IOException e) {
+            // this may be a "premature EOF" caused by e.g. incorrect content-length HTTP header
+            // so it may be non-fatal -- try to recover
+            Logger.exception(e);
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (Exception e) {
+                    // swallow
+                }
+            }
+        }
+        return bucket.toByteArray();
+    }
+
+    private void writeFitnesseResults(File resultsFilePath, byte[] results) {
+
+        try{
+            FileOutputStream fos = new FileOutputStream(resultsFilePath);
+            fos.write(results);
+            fos.close();
+        }
+        catch (Exception e)
+        {
+            Logger.exception(e);
+        }
+    }
+
+    private void waitWhileUnpacking(Process fitProcess) throws  Exception
+    {
+        BufferedReader is = new BufferedReader(new InputStreamReader(fitProcess.getInputStream()));
+
+        int timeout = 60;
+        int count = 0;
+        String line = "";
+        do{
+            line = is.readLine();
+            if (line != null)
+                Logger.progressMessage("Fitnesse out:"+line);
+            else
+            {
+                Thread.sleep(1000);
+                count++;
+            }
+
+        }while (!line.contains("page version expiration set to") && count<timeout);
+
+    }
 
 
 
@@ -101,12 +169,13 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
             Process fitProcess = runFitnesseInstance();
             Logger.progressMessage("Fitnesse runned");
+            waitWhileUnpacking(fitProcess);
 
 
-            //logger.progressMessage("ZipPath: " + output);
-            //throw new RunBuildException("The Folder path provided is not a folder");
+            byte[] bytes = getHttpBytes(new URL("http://localhost:"+getParameter("fitnessePort")+"/"+getParameter("fitnesseTest")+"&format=xml"));
+            writeFitnesseResults(new File(getParameter("fitnesseResult")), bytes);
 
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
             Logger.progressMessage("terminating");
 
             fitProcess.destroy();

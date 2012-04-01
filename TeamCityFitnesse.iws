@@ -2,34 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f86a6310-ec63-4ac2-bc38-7c9594f15102" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FutureBasedBuildProcess.java" />
-      <change type="DELETED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\AgentListener.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\FitnesseProcessListenerAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\FitnesseRunnerBuildServiceAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\FitnesseRunnerCommandLineBuildServiceFactory.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Advard\Documents\My Dropbox\JAVA_Proj\TeamCityFitnesse\agent\src\Fitnesse\agent\FitnesseRunnerAgentBuildRunnerInfo.java" afterPath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TeamCityFitnesse.iml" afterPath="$PROJECT_DIR$/TeamCityFitnesse.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TeamCityFitnesse.ipr" afterPath="$PROJECT_DIR$/TeamCityFitnesse.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TeamCityFitnesse.iws" afterPath="$PROJECT_DIR$/TeamCityFitnesse.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/agent/Fitnesse-agent.iml" afterPath="$PROJECT_DIR$/agent/Fitnesse-agent.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml" afterPath="$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.properties" afterPath="$PROJECT_DIR$/build.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/Fitnesse-common.iml" afterPath="$PROJECT_DIR$/common/Fitnesse-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java" afterPath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java" afterPath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FutureBasedBuildProcess.java" afterPath="$PROJECT_DIR$/agent/src/Fitnesse/agent/FutureBasedBuildProcess.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/Fitnesse/common/Util.java" afterPath="$PROJECT_DIR$/common/src/Fitnesse/common/Util.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/Fitnesse-server.iml" afterPath="$PROJECT_DIR$/server/Fitnesse-server.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/resources/buildServerResources/Fitnesse.jsp" afterPath="$PROJECT_DIR$/server/resources/buildServerResources/Fitnesse.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/resources/buildServerResources/editFitnesse.jsp" afterPath="$PROJECT_DIR$/server/resources/buildServerResources/editFitnesse.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/resources/buildServerResources/viewFitnesse.jsp" afterPath="$PROJECT_DIR$/server/resources/buildServerResources/viewFitnesse.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/Fitnesse/server/Controller.java" afterPath="$PROJECT_DIR$/server/src/Fitnesse/server/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/Fitnesse/server/FitnessePropertiesProcessor.java" afterPath="$PROJECT_DIR$/server/src/Fitnesse/server/FitnessePropertiesProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/Fitnesse/server/FitnesseRunType.java" afterPath="$PROJECT_DIR$/server/src/Fitnesse/server/FitnesseRunType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/Fitnesse/server/ServerListener.java" afterPath="$PROJECT_DIR$/server/src/Fitnesse/server/ServerListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamcity-common.xml" afterPath="$PROJECT_DIR$/teamcity-common.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamcity-plugin.xml" afterPath="$PROJECT_DIR$/teamcity-plugin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamcityfitnesse.xml" afterPath="$PROJECT_DIR$/teamcityfitnesse.xml" />
     </list>
     <ignored path="TeamCityFitnesse.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,98 +65,105 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Runtime.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/lang/Runtime.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="775" column="42" selection-start="32320" selection-end="32320" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#37018#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FitnesseRunner.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="13" selection-start="799" selection-end="799" vertical-scroll-proportion="0.18478261">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build-agent-plugin-TeamCityFitnesse.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FitnesseProcess.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="FitnesseProcess.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="39" selection-start="3288" selection-end="3288" vertical-scroll-proportion="0.0">
+            <state line="176" column="80" selection-start="5604" selection-end="5604" vertical-scroll-proportion="0.4076655">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/Controller.java">
+      <file leaf-file-name="BufferedWriter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/BufferedWriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="13" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FitnessePropertiesProcessor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/FitnessePropertiesProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="13" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Util.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/src/Fitnesse/common/Util.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="13" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FitnesseRunType.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/FitnesseRunType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="13" selection-start="1080" selection-end="1080" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerListener.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/ServerListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="13" selection-start="421" selection-end="421" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AgentBuildSettings.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/AgentBuildSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="218" column="2" selection-start="5328" selection-end="5346" vertical-scroll-proportion="0.0">
+            <state line="245" column="13" selection-start="7273" selection-end="7273" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#6003#0" expanded="false" />
+                <element signature="e#0#7385#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/File.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="879" column="19" selection-start="35741" selection-end="35741" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#80498#0" expanded="false" />
                 <element signature="imports" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="URI.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/net/URI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="575" column="13" selection-start="26400" selection-end="26400" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BufferedReader.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/BufferedReader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="360" column="18" selection-start="10731" selection-end="10731" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#14572#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ByteArrayOutputStream.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/ByteArrayOutputStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="135" column="4" selection-start="4131" selection-end="4131" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="docComment;method#size#0;class#ByteArrayOutputStream#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OutputStream.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/OutputStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="125" column="20" selection-start="5094" selection-end="5094" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#5495#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Process.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/lang/Process.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="20" selection-start="2629" selection-end="2641" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#5184#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editFitnesse.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/resources/buildServerResources/editFitnesse.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="38" selection-start="1059" selection-end="1073" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FitnesseRunner.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="13" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -197,9 +182,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/agent/src/TeamCityFitnesse/agent/FitnesseRunner.java" />
-        <option value="$PROJECT_DIR$/agent/src/TeamCityFitnesse/agent/FitnesseRunnerBuildServiceAdapter.java" />
-        <option value="$PROJECT_DIR$/server/src/TeamCityFitnesse/server/FitnessePropertiesProcessor.java" />
         <option value="$PROJECT_DIR$/server/resources/buildServerResources/TeamCityFitnesse.jsp" />
         <option value="$PROJECT_DIR$/server/src/TeamCityFitnesse/server/FitnesseRunType.java" />
         <option value="$PROJECT_DIR$/server/src/META-INF/build-server-plugin-TeamCityFitnesse.xml" />
@@ -209,9 +191,12 @@
         <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcessListenerAdapter.java" />
         <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseBuildProcessAdapter.java" />
         <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunnerAgentBuildRunnerInfo.java" />
+        <option value="$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml" />
+        <option value="$PROJECT_DIR$/server/resources/buildServerResources/viewFitnesse.jsp" />
+        <option value="$PROJECT_DIR$/common/src/Fitnesse/common/Util.java" />
         <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FutureBasedBuildProcess.java" />
         <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java" />
-        <option value="$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml" />
+        <option value="$PROJECT_DIR$/server/resources/buildServerResources/editFitnesse.jsp" />
         <option value="$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java" />
       </list>
     </option>
@@ -334,6 +319,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeamCityFitnesse" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="buildServerResources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -592,10 +595,10 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.5291288" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.5334046" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.4671299" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.4628541" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -699,128 +702,42 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/TCLineReader.java">
+    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FutureBasedBuildProcess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="13" selection-start="779" selection-end="779" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#3600#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/ThreadUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="13" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#2135#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="13" selection-start="931" selection-end="931" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#3184#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/Win32RegistryAccessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="17" selection-start="890" selection-end="890" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#2845#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/SimpleExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="13" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#794#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/util/RunCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="35" selection-start="1418" selection-end="1418" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#2780#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/lang/Runtime.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="775" column="42" selection-start="32320" selection-end="32320" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#37018#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/jetbrains/buildServer/agent/AgentBuildSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="218" column="2" selection-start="5328" selection-end="5346" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#6003#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="39" selection-start="3288" selection-end="3288" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/FitnesseRunType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="13" selection-start="1080" selection-end="1080" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/ServerListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="13" selection-start="421" selection-end="421" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
+        <state line="22" column="21" selection-start="812" selection-end="812" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/Fitnesse/server/FitnessePropertiesProcessor.java">
+    <entry file="file://$PROJECT_DIR$/teamcity-common.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="13" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.0">
+        <state line="18" column="26" selection-start="463" selection-end="463" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/Fitnesse/common/Util.java">
+    <entry file="file://$PROJECT_DIR$/teamcity-plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="13" selection-start="690" selection-end="690" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/agent/src/META-INF/build-agent-plugin-TeamCityFitnesse.xml">
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/resources/buildServerResources/Fitnesse.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
@@ -829,7 +746,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="13" selection-start="799" selection-end="799" vertical-scroll-proportion="0.18478261">
+        <state line="8" column="13" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/lang/Process.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="20" selection-start="2629" selection-end="2641" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#5184#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/OutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="125" column="20" selection-start="5094" selection-end="5094" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#5495#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/ByteArrayOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="4" selection-start="4131" selection-end="4131" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="docComment;method#size#0;class#ByteArrayOutputStream#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/BufferedReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="360" column="18" selection-start="10731" selection-end="10731" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#14572#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/net/URI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="575" column="13" selection-start="26400" selection-end="26400" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="879" column="19" selection-start="35741" selection-end="35741" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#80498#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/src.zip!/java/io/BufferedWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="245" column="13" selection-start="7273" selection-end="7273" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#7385#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/resources/buildServerResources/editFitnesse.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="38" selection-start="1059" selection-end="1073" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agent/src/Fitnesse/agent/FitnesseProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="176" column="80" selection-start="5604" selection-end="5604" vertical-scroll-proportion="0.4076655">
           <folding />
         </state>
       </provider>
