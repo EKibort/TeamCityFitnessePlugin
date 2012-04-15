@@ -8,10 +8,17 @@ import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.agent.BuildRunnerContext;
 import org.jetbrains.annotations.NotNull;
 
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.Date;
+import javax.xml.stream.*;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -75,7 +82,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         {
             String cmdFitnesse = getFitnesseCmd();
             String rootFolder = getFitnesseRoot();
-            Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'",cmdFitnesse, rootFolder));
+            Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'", cmdFitnesse, rootFolder));
 
             return Runtime.getRuntime().exec(cmdFitnesse, null, new File(rootFolder));
         }
@@ -83,6 +90,156 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Logger.exception(e);
         }
         return null;
+    }
+
+
+    public boolean  getSuiteResults(URL pageCmdTarget)
+    {
+        InputStream  inputStream =null;
+        try
+        {
+            Logger.progressMessage("Connnecting to " + pageCmdTarget);
+            HttpURLConnection connection = (HttpURLConnection) pageCmdTarget.openConnection();
+            Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
+
+            inputStream = connection.getInputStream();
+
+            XMLEventReader xmlReader  = XMLInputFactory.newInstance().createXMLEventReader(inputStream);
+
+            Integer rightCount = 0;
+            Integer wrongCount = 0;
+            Integer ignoresCount = 0;
+            Integer exceptionsCount = 0;
+            Integer runTimeInMillis = 0;
+            String relativePageName = "";
+            String pageHistoryLink = "";
+
+
+/*            <counts>
+            <right>3</right>
+            <wrong>0</wrong>
+            <ignores>0</ignores>
+            <exceptions>0</exceptions>
+            </counts>
+            <runTimeInMillis>423</runTimeInMillis>
+            <relativePageName>AddChildToNonExistentPageTest</relativePageName>
+            <pageHistoryLink>FitNesse.SuiteAcceptanceTests.SuiteResponderTests.AddChildResponderSuite.AddChildToNonExistentPageTest?pageHistory&amp;resultDate=20120401210536&amp;format=xml</pageHistoryLink>
+*/
+
+            Logger.logSuiteStarted("FitNesse");
+
+            while (xmlReader.hasNext())
+            {
+                XMLEvent event = xmlReader.nextEvent();
+                if (event.isStartElement())
+                {
+                    StartElement startElement = event.asStartElement();
+                    String elName = startElement.getName().getLocalPart();
+
+                    if (elName.equalsIgnoreCase("result"))
+                    {
+                        rightCount = 0;
+                        wrongCount = 0;
+                        ignoresCount = 0;
+                        exceptionsCount = 0;
+                        runTimeInMillis = 0;
+                        relativePageName = "";
+                        pageHistoryLink = "";
+                    }
+                    else if (elName.equalsIgnoreCase("right"))
+                    {
+                        event = xmlReader.nextEvent();
+                        String data = event.asCharacters().getData();
+                        rightCount = Integer.parseInt(data );
+                    }
+                    else if (elName.equalsIgnoreCase("wrong"))
+                    {
+                        event = xmlReader.nextEvent();
+                        String data = event.asCharacters().getData();
+                        wrongCount = Integer.parseInt(data );
+                    }
+                    else if (elName.equalsIgnoreCase("ignores"))
+                    {
+                        event = xmlReader.nextEvent();
+                        String data = event.asCharacters().getData();
+                        ignoresCount = Integer.parseInt(data );
+                    }
+                    else if (elName.equalsIgnoreCase("exceptions"))
+                    {
+                        event = xmlReader.nextEvent();
+                        String data = event.asCharacters().getData();
+                        exceptionsCount = Integer.parseInt(data );
+                    }
+                    else if (elName.equalsIgnoreCase("runTimeInMillis"))
+                    {
+                        event = xmlReader.nextEvent();
+                        String data = event.asCharacters().getData();
+                        runTimeInMillis = Integer.parseInt(data );
+                    }
+                    else if (elName.equalsIgnoreCase("relativePageName"))
+                    {
+                        event = xmlReader.nextEvent();
+                        relativePageName= event.asCharacters().getData();
+                    }
+                    else if (elName.equalsIgnoreCase("pageHistoryLink"))
+                    {
+                        event = xmlReader.nextEvent();
+                        pageHistoryLink= event.asCharacters().getData();
+
+                        Logger.progressMessage("found  "+pageHistoryLink);
+                    }
+                }
+                else
+                if (event.isEndElement())
+                {
+                    EndElement endElement = event.asEndElement();
+                    if (endElement.getName().getLocalPart().equalsIgnoreCase("result"))
+                    {
+                        //int questMarkIndex = pageHistoryLink.indexOf('?');
+                        //if (questMarkIndex > 0)
+                        //{
+                            //String testName = pageHistoryLink.substring(0,questMarkIndex);
+                            String testName = pageHistoryLink;
+                            if ((rightCount == 0) && (wrongCount ==0) && (exceptionsCount == 0))
+                            {
+                                Logger.logTestIgnored(testName, "empty test");
+                            }
+                            else
+                            {
+                                Logger.logTestStarted(testName, new Date(System.currentTimeMillis()-runTimeInMillis));
+
+                                if ((wrongCount >0) || (exceptionsCount > 0))
+                                {
+                                    Logger.logTestFailed(testName, String.format("wrong:%d  exception:%d", wrongCount, exceptionsCount), "" );
+                                }
+
+                                Logger.logTestFinished(testName,  new Date());
+                            }
+                        //}
+                }
+                }
+            }
+            xmlReader.close();
+        }
+        catch (Exception e)
+        {
+            Logger.exception(e);
+        } finally
+        {
+            if (inputStream != null)
+            {
+                try
+                {
+                    inputStream.close();
+                }
+                catch (Exception e)
+                {
+                }
+            }
+            Logger.logSuiteFinished("FitNesse");
+        }
+        return true;
+
     }
 
 
@@ -96,6 +253,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
 
             inputStream = connection.getInputStream();
+
             long recvd = 0, lastLogged = 0;
             byte[] buf = new byte[4096];
             int lastRead;
@@ -172,8 +330,10 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             waitWhileUnpacking(fitProcess);
 
 
-            byte[] bytes = getHttpBytes(new URL("http://localhost:"+getParameter("fitnessePort")+"/"+getParameter("fitnesseTest")+"&format=xml"));
-            writeFitnesseResults(new File(getParameter("fitnesseResult")), bytes);
+            //byte[] bytes = getHttpBytes(new URL("http://localhost:"+getParameter("fitnessePort")+"/"+getParameter("fitnesseTest")+"&format=xml"));
+            //writeFitnesseResults(new File(getParameter("fitnesseResult")), bytes);
+
+            getSuiteResults(new URL("http://localhost:"+getParameter("fitnessePort")+"/"+getParameter("fitnesseTest")+"&format=xml"));
 
             //Thread.sleep(5000);
             Logger.progressMessage("terminating");
