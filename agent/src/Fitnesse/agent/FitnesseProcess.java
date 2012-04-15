@@ -103,6 +103,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
 
             inputStream = connection.getInputStream();
+            inputStream.reset();
 
             XMLEventReader xmlReader  = XMLInputFactory.newInstance().createXMLEventReader(inputStream);
 
@@ -113,18 +114,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Integer runTimeInMillis = 0;
             String relativePageName = "";
             String pageHistoryLink = "";
-
-
-/*            <counts>
-            <right>3</right>
-            <wrong>0</wrong>
-            <ignores>0</ignores>
-            <exceptions>0</exceptions>
-            </counts>
-            <runTimeInMillis>423</runTimeInMillis>
-            <relativePageName>AddChildToNonExistentPageTest</relativePageName>
-            <pageHistoryLink>FitNesse.SuiteAcceptanceTests.SuiteResponderTests.AddChildResponderSuite.AddChildToNonExistentPageTest?pageHistory&amp;resultDate=20120401210536&amp;format=xml</pageHistoryLink>
-*/
 
             Logger.logSuiteStarted("FitNesse");
 
@@ -242,59 +231,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
     }
 
-
-    public byte[] getHttpBytes(URL pageCmdTarget) {
-        InputStream inputStream = null;
-        ByteArrayOutputStream bucket = new ByteArrayOutputStream();
-
-        try {
-            Logger.progressMessage("Connnecting to " + pageCmdTarget);
-            HttpURLConnection connection = (HttpURLConnection) pageCmdTarget.openConnection();
-            Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
-
-            inputStream = connection.getInputStream();
-
-            long recvd = 0, lastLogged = 0;
-            byte[] buf = new byte[4096];
-            int lastRead;
-            while ((lastRead = inputStream.read(buf)) > 0) {
-                bucket.write(buf, 0, lastRead);
-                //timeout.reset();
-                recvd += lastRead;
-                if (recvd - lastLogged > 1024) {
-                    Logger.progressMessage(recvd / 1024 + "k...");
-                    lastLogged = recvd;
-                }
-            }
-        } catch (IOException e) {
-            // this may be a "premature EOF" caused by e.g. incorrect content-length HTTP header
-            // so it may be non-fatal -- try to recover
-            Logger.exception(e);
-        } finally {
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (Exception e) {
-                    // swallow
-                }
-            }
-        }
-        return bucket.toByteArray();
-    }
-
-    private void writeFitnesseResults(File resultsFilePath, byte[] results) {
-
-        try{
-            FileOutputStream fos = new FileOutputStream(resultsFilePath);
-            fos.write(results);
-            fos.close();
-        }
-        catch (Exception e)
-        {
-            Logger.exception(e);
-        }
-    }
-
     private void waitWhileUnpacking(Process fitProcess) throws  Exception
     {
         BufferedReader is = new BufferedReader(new InputStreamReader(fitProcess.getInputStream()));
@@ -313,29 +249,19 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             }
 
         }while (!line.contains("page version expiration set to") && count<timeout);
-
     }
-
-
 
     @NotNull
     public BuildFinishedStatus call() throws Exception
     {
         try
         {
-            //Runtime.getRuntime().exec("");
-
             Process fitProcess = runFitnesseInstance();
             Logger.progressMessage("Fitnesse runned");
             waitWhileUnpacking(fitProcess);
 
-
-            //byte[] bytes = getHttpBytes(new URL("http://localhost:"+getParameter("fitnessePort")+"/"+getParameter("fitnesseTest")+"&format=xml"));
-            //writeFitnesseResults(new File(getParameter("fitnesseResult")), bytes);
-
             getSuiteResults(new URL("http://localhost:"+getParameter("fitnessePort")+"/"+getParameter("fitnesseTest")+"&format=xml"));
 
-            //Thread.sleep(5000);
             Logger.progressMessage("terminating");
 
             fitProcess.destroy();
