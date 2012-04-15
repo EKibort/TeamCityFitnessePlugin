@@ -66,7 +66,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         /*String[] result =
                 {"java",
                  "-jar",jarFitnesse.getAbsolutePath(),
-                 //"-d", rootFitnesse.getAbsolutePath() , //TODO Adbs path
+                 //"-d", rootFitnesse.getAbsolutePath() , //TODO Add path
                  //"-r", "FitNesseRoot",
                  "-p", getParameter("fitnessePort"),
         };*/
@@ -107,6 +107,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
             XMLEventReader xmlReader  = XMLInputFactory.newInstance().createXMLEventReader(inputStream);
 
+            //TODO Move to separated class
             Integer rightCount = 0;
             Integer wrongCount = 0;
             Integer ignoresCount = 0;
@@ -137,6 +138,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                     }
                     else if (elName.equalsIgnoreCase("right"))
                     {
+                        //TODO remove dupl
                         event = xmlReader.nextEvent();
                         String data = event.asCharacters().getData();
                         rightCount = Integer.parseInt(data );
@@ -174,8 +176,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                     {
                         event = xmlReader.nextEvent();
                         pageHistoryLink= event.asCharacters().getData();
-
-                        Logger.progressMessage("found  "+pageHistoryLink);
                     }
                 }
                 else
@@ -184,27 +184,22 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                     EndElement endElement = event.asEndElement();
                     if (endElement.getName().getLocalPart().equalsIgnoreCase("result"))
                     {
-                        //int questMarkIndex = pageHistoryLink.indexOf('?');
-                        //if (questMarkIndex > 0)
-                        //{
-                            //String testName = pageHistoryLink.substring(0,questMarkIndex);
-                            String testName = pageHistoryLink;
-                            if ((rightCount == 0) && (wrongCount ==0) && (exceptionsCount == 0))
-                            {
-                                Logger.logTestIgnored(testName, "empty test");
-                            }
-                            else
-                            {
-                                Logger.logTestStarted(testName, new Date(System.currentTimeMillis()-runTimeInMillis));
+                        String testName = pageHistoryLink;
+                        if ((rightCount == 0) && (wrongCount ==0) && (exceptionsCount == 0))
+                        {
+                            Logger.logTestIgnored(testName, "empty test");
+                        }
+                        else
+                        {
+                            Logger.logTestStarted(testName, new Date(System.currentTimeMillis()-runTimeInMillis));
 
-                                if ((wrongCount >0) || (exceptionsCount > 0))
-                                {
-                                    Logger.logTestFailed(testName, String.format("wrong:%d  exception:%d", wrongCount, exceptionsCount), "" );
-                                }
-
-                                Logger.logTestFinished(testName,  new Date());
+                            if ((wrongCount >0) || (exceptionsCount > 0))
+                            {
+                                Logger.logTestFailed(testName, String.format("wrong:%d  exception:%d", wrongCount, exceptionsCount), "" );
                             }
-                        //}
+
+                            Logger.logTestFinished(testName,  new Date());
+                        }
                 }
                 }
             }
@@ -241,7 +236,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         do{
             line = is.readLine();
             if (line != null)
-                Logger.progressMessage("Fitnesse out:"+line);
+                Logger.progressMessage("\t"+line);
             else
             {
                 Thread.sleep(1000);
@@ -256,10 +251,15 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     {
         try
         {
+            //TODO Support detecting free port in range
+            //TODO detect fitnesse version
             Process fitProcess = runFitnesseInstance();
             Logger.progressMessage("Fitnesse runned");
             waitWhileUnpacking(fitProcess);
 
+            //TODO Support multiple tests
+            //TODO Support running multiple tests in parallel
+            //TODO Support detecting type suite vs test
             getSuiteResults(new URL("http://localhost:"+getParameter("fitnessePort")+"/"+getParameter("fitnesseTest")+"&format=xml"));
 
             Logger.progressMessage("terminating");
