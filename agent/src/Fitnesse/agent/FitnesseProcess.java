@@ -58,23 +58,10 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return jarFitnesse.getParent();
     }
 
-
-
-    private String getFitnesseCmd()
+    private String getFitNesseCmd()
     {
         File jarFitnesse = new File(getParameter("fitnesseJarPath"));
-        //File rootFitnesse = new File(jarFitnesse.getParent());
-
-        /*String[] result =
-                {"java",
-                 "-jar",jarFitnesse.getAbsolutePath(),
-                 //"-d", rootFitnesse.getAbsolutePath() , //TODO Add path
-                 //"-r", "FitNesseRoot",
-                 "-p", getParameter("fitnessePort"),
-        };*/
-
-        String  result = String.format("java -jar %s  -p %s",jarFitnesse.getAbsolutePath(), getParameter("fitnessePort"));
-
+        String  result = String.format("java -jar \"%s\"  -p %d",jarFitnesse.getAbsolutePath(), getPort());
         return result;
     }
 
@@ -82,7 +69,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     {
         try
         {
-            String cmdFitnesse = getFitnesseCmd();
+            String cmdFitnesse = getFitNesseCmd();
             String rootFolder = getFitnesseRoot();
             Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'", cmdFitnesse, rootFolder));
 
@@ -105,7 +92,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
 
             inputStream = connection.getInputStream();
-//           inputStream.reset();
 
             XMLEventReader xmlReader  = XMLInputFactory.newInstance().createXMLEventReader(inputStream);
 
@@ -210,16 +196,12 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         catch (Exception e)
         {
             Logger.exception(e);
-        } finally
-        {
-            if (inputStream != null)
-            {
-                try
-                {
+        } finally{
+            if (inputStream != null){
+                try {
                     inputStream.close();
                 }
-                catch (Exception e)
-                {
+                catch (Exception e){
                 }
             }
             Logger.logSuiteFinished("FitNesse");
@@ -228,7 +210,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
     }
 
-    private void waitWhileUnpacking(Process fitProcess) throws  Exception
+    private boolean waitWhileUnpacking(Process fitProcess) throws  Exception
     {
         BufferedReader is = new BufferedReader(new InputStreamReader(fitProcess.getInputStream()));
 
@@ -245,7 +227,8 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                 count++;
             }
 
-        }while (!line.contains("page version expiration set to") && count<timeout);
+        }while (!line.contains("page version expiration set to") && count<timeout && !isInterrupted());
+        return line.contains("page version expiration set to");
     }
 
     private int getPort()
@@ -272,34 +255,41 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     @NotNull
     public BuildFinishedStatus call() throws Exception
     {
-        //TODO Do nothing if suite url empty
-        if (!isShouldBeRun())
-        {
+        if (!isShouldBeRun()) {
             Logger.message("Nothing to run");
             return BuildFinishedStatus.FINISHED_SUCCESS;
         }
 
-        try
-        {
+
+        try {
             //TODO Support detecting free port in range
             //TODO detect fitnesse version
             //TODO add http timeout
-            Process fitProcess = runFitnesseInstance();
-            Logger.progressMessage("Fitnesse runned");
-            waitWhileUnpacking(fitProcess);
+            Process fitProcess = null;
 
-            //TODO Support multiple tests
-            //TODO Support running multiple tests in parallel
-            getSuiteResults(getTestAbsoluteUrl());
+            try {
+                fitProcess = runFitnesseInstance();
+                Logger.progressMessage("Fitnesse runned");
+                if (waitWhileUnpacking(fitProcess)) {
+                    //TODO Support multiple tests
+                    //TODO Support running multiple tests in parallel
+                    getSuiteResults(getTestAbsoluteUrl());
 
-            Logger.progressMessage("terminating");
-
-            fitProcess.destroy();
+                    Logger.progressMessage("terminating");
+                }
+                else {
+                    Logger.error("Could not start fitnesse or interupted");
+                    return  isInterrupted()?BuildFinishedStatus.INTERRUPTED:BuildFinishedStatus.FINISHED_FAILED;
+                }
+            }
+            finally {
+                if (fitProcess != null)
+                    fitProcess.destroy();
+            }
 
             return BuildFinishedStatus.FINISHED_SUCCESS;
         }
-        catch (Exception e)
-        {
+        catch (Exception e){
             Logger.exception(e);
             return BuildFinishedStatus.FINISHED_FAILED;
         }

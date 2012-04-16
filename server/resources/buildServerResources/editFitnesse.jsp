@@ -6,7 +6,6 @@
 <jsp:useBean id="propertiesBean" scope="request" type="jetbrains.buildServer.controllers.BasePropertiesBean"/>
 
 <l:settingsGroup title="Fitnesse options">
- 
     <tr>
         <th>
             <label for="fitnesseJarPath">Fitnesse: </label>
@@ -29,22 +28,12 @@
     </tr>
     <tr>
         <th>
-            <label for="fitnesseResult">Result xml: </label>
-        </th>
-        <td>
-            <props:textProperty name="fitnesseResult" />
-            <span class="error" id="error_fitnesseResult"></span>
-            <span class="smallNote">fitresult.xml</span>
-        </td>
-    </tr>
-    <tr>
-        <th>
             <label for="fitnesseTest">Test or suite relative url </label>
         </th>
         <td>
             <props:textProperty name="fitnesseTest" />
             <span class="error" id="error_fitnesseTest"></span>
-            <span class="smallNote">TestSuite.SubSuite</span>
+            <span class="smallNote">TestSuite.SubSuite?sute or TestSuite.SuperTest?test</span>
         </td>
     </tr>
 </l:settingsGroup>
