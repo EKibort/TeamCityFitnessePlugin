@@ -1,7 +1,6 @@
 package Fitnesse.agent;
 
-import com.intellij.execution.util.EnvironmentVariable;
-import jetbrains.buildServer.RunBuildException;
+import Fitnesse.common.Util;
 import jetbrains.buildServer.agent.AgentRunningBuild;
 import jetbrains.buildServer.agent.BuildFinishedStatus;
 import jetbrains.buildServer.agent.BuildProgressLogger;
@@ -11,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.URI;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import javax.xml.stream.*;
@@ -28,6 +27,9 @@ import javax.xml.stream.events.XMLEvent;
  * To change this template use File | Settings | File Templates.
  */
 public class FitnesseProcess extends  FutureBasedBuildProcess {
+
+    private final static String LOCAL_URL = "http://localhost";
+
     @NotNull
     private final AgentRunningBuild Build;
     @NotNull
@@ -103,7 +105,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
 
             inputStream = connection.getInputStream();
-            inputStream.reset();
+//           inputStream.reset();
 
             XMLEventReader xmlReader  = XMLInputFactory.newInstance().createXMLEventReader(inputStream);
 
@@ -246,21 +248,49 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         }while (!line.contains("page version expiration set to") && count<timeout);
     }
 
+    private int getPort()
+    {
+        return Integer.parseInt(getParameter(Util.PROPERTY_FITNESSE_PORT));
+    }
+
+    private String getTestRelativeUrl()
+    {
+        return getParameter(Util.PROPERTY_FITNESSE_TEST);
+    }
+
+    private URL getTestAbsoluteUrl() throws MalformedURLException
+    {
+        return new URL(String.format("%s:%d/%s&format=xml",LOCAL_URL, getPort(), getTestRelativeUrl()));
+    }
+
+    private boolean isShouldBeRun()
+    {
+        String relUrl = getTestRelativeUrl();
+        return (relUrl != null) && (relUrl.indexOf('?') > 0);
+    }
+
     @NotNull
     public BuildFinishedStatus call() throws Exception
     {
+        //TODO Do nothing if suite url empty
+        if (!isShouldBeRun())
+        {
+            Logger.message("Nothing to run");
+            return BuildFinishedStatus.FINISHED_SUCCESS;
+        }
+
         try
         {
             //TODO Support detecting free port in range
             //TODO detect fitnesse version
+            //TODO add http timeout
             Process fitProcess = runFitnesseInstance();
             Logger.progressMessage("Fitnesse runned");
             waitWhileUnpacking(fitProcess);
 
             //TODO Support multiple tests
             //TODO Support running multiple tests in parallel
-            //TODO Support detecting type suite vs test
-            getSuiteResults(new URL("http://localhost:"+getParameter("fitnessePort")+"/"+getParameter("fitnesseTest")+"&format=xml"));
+            getSuiteResults(getTestAbsoluteUrl());
 
             Logger.progressMessage("terminating");
 
@@ -270,6 +300,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         }
         catch (Exception e)
         {
+            Logger.exception(e);
             return BuildFinishedStatus.FINISHED_FAILED;
         }
     }
