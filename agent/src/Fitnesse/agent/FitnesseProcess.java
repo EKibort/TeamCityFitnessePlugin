@@ -82,9 +82,11 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     }
 
 
-    public boolean  getSuiteResults(URL pageCmdTarget)
+    public boolean  getSuiteResults(String relUrl) throws MalformedURLException
     {
+        URL pageCmdTarget = getTestAbsoluteUrl(relUrl);
         InputStream  inputStream =null;
+        String suiteName = "FitNesse "+relUrl;
         try
         {
             Logger.progressMessage("Connnecting to " + pageCmdTarget);
@@ -104,7 +106,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             String relativePageName = "";
             String pageHistoryLink = "";
 
-            Logger.logSuiteStarted("FitNesse");
+            Logger.logSuiteStarted(suiteName);
 
             while (xmlReader.hasNext())
             {
@@ -204,7 +206,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                 catch (Exception e){
                 }
             }
-            Logger.logSuiteFinished("FitNesse");
+            Logger.logSuiteFinished(suiteName);
         }
         return true;
 
@@ -236,20 +238,26 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return Integer.parseInt(getParameter(Util.PROPERTY_FITNESSE_PORT));
     }
 
-    private String getTestRelativeUrl()
+    private String [] getTestRelativeUrls()
     {
-        return getParameter(Util.PROPERTY_FITNESSE_TEST);
+        return getParameter(Util.PROPERTY_FITNESSE_TEST).split(";");
     }
 
-    private URL getTestAbsoluteUrl() throws MalformedURLException
+    private URL getTestAbsoluteUrl(String relUrl) throws MalformedURLException
     {
-        return new URL(String.format("%s:%d/%s&format=xml",LOCAL_URL, getPort(), getTestRelativeUrl()));
+        return new URL(String.format("%s:%d/%s&format=xml",LOCAL_URL, getPort(), relUrl));
     }
 
     private boolean isShouldBeRun()
     {
-        String relUrl = getTestRelativeUrl();
-        return (relUrl != null) && (relUrl.indexOf('?') > 0);
+        String[] relUrls = getTestRelativeUrls();
+
+        for (String relUrl : relUrls)
+        {
+            if (relUrl.indexOf('?') > 0)
+                return true;
+        }
+        return false;
     }
 
     @NotNull
@@ -273,7 +281,11 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                 if (waitWhileUnpacking(fitProcess)) {
                     //TODO Support multiple tests
                     //TODO Support running multiple tests in parallel
-                    getSuiteResults(getTestAbsoluteUrl());
+
+                    for (String relUrl : getTestRelativeUrls())
+                    {
+                        getSuiteResults(relUrl);
+                    }
 
                     Logger.progressMessage("terminating");
                 }
