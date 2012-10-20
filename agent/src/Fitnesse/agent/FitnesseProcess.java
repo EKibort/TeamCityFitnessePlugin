@@ -12,6 +12,9 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import javax.xml.stream.*;
 import javax.xml.stream.events.EndElement;
@@ -46,8 +49,13 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
     private String getParameter(@NotNull final String parameterName)
     {
+        return getParameter(parameterName, null);
+    }
+
+    private String getParameter(@NotNull final String parameterName, String defaultValue)
+    {
         final String value = Context.getRunnerParameters().get(parameterName);
-        if (value == null || value.trim().length() == 0) return null;
+        if (value == null || value.trim().length() == 0) return defaultValue;
         String result = value.trim();
         return result;
     }
@@ -58,20 +66,19 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return jarFitnesse.getParent();
     }
 
-    private String getFitNesseCmd()
+    private String[] getFitNesseCmd()
     {
         File jarFitnesse = new File(getParameter("fitnesseJarPath"));
-        String  result = String.format("java -jar \"%s\"  -p %d",jarFitnesse.getAbsolutePath(), getPort());
-        return result;
+        return new String[] {"java", "-jar", jarFitnesse.getAbsolutePath(), "-p", ""+getPort()};
     }
 
     private Process runFitnesseInstance()
     {
         try
         {
-            String cmdFitnesse = getFitNesseCmd();
+            String[] cmdFitnesse = getFitNesseCmd();
             String rootFolder = getFitnesseRoot();
-            Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'", cmdFitnesse, rootFolder));
+            Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'",  Util.join(Arrays.asList(cmdFitnesse), " "), rootFolder));
 
             return Runtime.getRuntime().exec(cmdFitnesse, null, new File(rootFolder));
         }
@@ -214,6 +221,8 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
     private boolean waitWhileUnpacking(Process fitProcess) throws  Exception
     {
+        InputStream inStream = fitProcess.getInputStream();
+
         BufferedReader is = new BufferedReader(new InputStreamReader(fitProcess.getInputStream()));
 
         int timeout = 60;
@@ -238,9 +247,17 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return Integer.parseInt(getParameter(Util.PROPERTY_FITNESSE_PORT));
     }
 
-    private String [] getTestRelativeUrls()
+    private Collection<String> getTestRelativeUrls()
     {
-        return getParameter(Util.PROPERTY_FITNESSE_TEST).split(";");
+        Collection<String> testsRelUrls = new ArrayList<String>();
+
+        for(String relUrl :  getParameter(Util.PROPERTY_FITNESSE_TEST, "").split(";"))
+        {
+            String trimmedUrl = relUrl.trim();
+            if (!trimmedUrl.isEmpty() && trimmedUrl.indexOf('?') > 0)
+                testsRelUrls.add(trimmedUrl);
+        }
+        return testsRelUrls;
     }
 
     private URL getTestAbsoluteUrl(String relUrl) throws MalformedURLException
@@ -248,22 +265,12 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return new URL(String.format("%s:%d/%s&format=xml",LOCAL_URL, getPort(), relUrl));
     }
 
-    private boolean isShouldBeRun()
-    {
-        String[] relUrls = getTestRelativeUrls();
-
-        for (String relUrl : relUrls)
-        {
-            if (relUrl.indexOf('?') > 0)
-                return true;
-        }
-        return false;
-    }
-
     @NotNull
     public BuildFinishedStatus call() throws Exception
     {
-        if (!isShouldBeRun()) {
+        Collection<String> testsToRun =  getTestRelativeUrls();
+
+        if (testsToRun.isEmpty()) {
             Logger.message("Nothing to run");
             return BuildFinishedStatus.FINISHED_SUCCESS;
         }
@@ -277,12 +284,12 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
             try {
                 fitProcess = runFitnesseInstance();
-                Logger.progressMessage("Fitnesse runned");
+
+                Logger.progressMessage("Fitnesse runned "+fitProcess.toString());
                 if (waitWhileUnpacking(fitProcess)) {
-                    //TODO Support multiple tests
                     //TODO Support running multiple tests in parallel
 
-                    for (String relUrl : getTestRelativeUrls())
+                    for (String relUrl : testsToRun)
                     {
                         getSuiteResults(relUrl);
                     }
