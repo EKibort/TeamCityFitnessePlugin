@@ -1,5 +1,7 @@
 package Fitnesse.agent;
 
+import Fitnesse.agent.Results.ResultsProcessorFactory;
+import Fitnesse.agent.Results.ResultsStreamProcessor;
 import Fitnesse.common.Util;
 import jetbrains.buildServer.agent.AgentRunningBuild;
 import jetbrains.buildServer.agent.BuildFinishedStatus;
@@ -15,11 +17,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
-import javax.xml.stream.*;
-import javax.xml.stream.events.EndElement;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
 
 public class FitnesseProcess extends  FutureBasedBuildProcess {
 
@@ -31,11 +28,16 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     private final BuildRunnerContext Context;
     @NotNull
     private final BuildProgressLogger Logger;
+    @NotNull
+    private  final ResultsStreamProcessor ResultsProcessor;
+
+
 
     public FitnesseProcess (@NotNull final AgentRunningBuild build, @NotNull final BuildRunnerContext context){
         Build = build;
         Context = context;
         Logger = build.getBuildLogger();
+        ResultsProcessor = ResultsProcessorFactory.getProcessor(Logger);
     }
 
     private String getParameter(@NotNull final String parameterName) {
@@ -84,95 +86,12 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
 
             inputStream = connection.getInputStream();
-
-            XMLEventReader xmlReader  = XMLInputFactory.newInstance().createXMLEventReader(inputStream);
-
-            //TODO Move to separated class
-            Integer rightCount = 0;
-            Integer wrongCount = 0;
-            Integer ignoresCount = 0;
-            Integer exceptionsCount = 0;
-            Integer runTimeInMillis = 0;
-            String relativePageName = "";
-            String pageHistoryLink = "";
-
-            Logger.logSuiteStarted(suiteName);
-
-            while (xmlReader.hasNext()) {
-                XMLEvent event = xmlReader.nextEvent();
-                if (event.isStartElement()) {
-                    StartElement startElement = event.asStartElement();
-                    String elName = startElement.getName().getLocalPart();
-
-                    if (elName.equalsIgnoreCase("result")) {
-                        rightCount = 0;
-                        wrongCount = 0;
-                        ignoresCount = 0;
-                        exceptionsCount = 0;
-                        runTimeInMillis = 0;
-                        relativePageName = "";
-                        pageHistoryLink = "";
-                    }
-                    else if (elName.equalsIgnoreCase("right")) {
-                        //TODO remove dupl
-                        event = xmlReader.nextEvent();
-                        String data = event.asCharacters().getData();
-                        rightCount = Integer.parseInt(data );
-                    }
-                    else if (elName.equalsIgnoreCase("wrong")) {
-                        event = xmlReader.nextEvent();
-                        String data = event.asCharacters().getData();
-                        wrongCount = Integer.parseInt(data );
-                    }
-                    else if (elName.equalsIgnoreCase("ignores")) {
-                        event = xmlReader.nextEvent();
-                        String data = event.asCharacters().getData();
-                        ignoresCount = Integer.parseInt(data );
-                    }
-                    else if (elName.equalsIgnoreCase("exceptions")) {
-                        event = xmlReader.nextEvent();
-                        String data = event.asCharacters().getData();
-                        exceptionsCount = Integer.parseInt(data );
-                    }
-                    else if (elName.equalsIgnoreCase("runTimeInMillis")) {
-                        event = xmlReader.nextEvent();
-                        String data = event.asCharacters().getData();
-                        runTimeInMillis = Integer.parseInt(data );
-                    }
-                    else if (elName.equalsIgnoreCase("relativePageName")) {
-                        event = xmlReader.nextEvent();
-                        relativePageName= event.asCharacters().getData();
-                    }
-                    else if (elName.equalsIgnoreCase("pageHistoryLink")) {
-                        event = xmlReader.nextEvent();
-                        pageHistoryLink= event.asCharacters().getData();
-                    }
-                }
-                else
-                if (event.isEndElement()) {
-                    EndElement endElement = event.asEndElement();
-                    if (endElement.getName().getLocalPart().equalsIgnoreCase("result")) {
-                        String testName = pageHistoryLink;
-                        if ((rightCount == 0) && (wrongCount ==0) && (exceptionsCount == 0)) {
-                            Logger.logTestIgnored(testName, "empty test");
-                        }
-                        else {
-                            Logger.logTestStarted(testName, new Date(System.currentTimeMillis()-runTimeInMillis));
-
-                            if ((wrongCount >0) || (exceptionsCount > 0)) {
-                                Logger.logTestFailed(testName, String.format("wrong:%d  exception:%d", wrongCount, exceptionsCount), "" );
-                            }
-
-                            Logger.logTestFinished(testName,  new Date());
-                        }
-                }
-                }
-            }
-            xmlReader.close();
+            ResultsProcessor.ProcessStream(inputStream );
         }
-        catch (Exception e) {
-            Logger.exception(e);
-        } finally {
+        catch (Exception ex) {
+            Logger.exception(ex);
+        }
+        finally {
             if (inputStream != null){
                 try {
                     inputStream.close();
@@ -223,15 +142,22 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return new URL(String.format("%s:%d/%s&format=xml",LOCAL_URL, getPort(), relUrl));
     }
 
+
+    private void runSuites(Collection<String> relTestUrls) throws Exception {
+        //TODO Support running multiple tests in parallel
+        for (String relTestUrl : relTestUrls) {
+            getSuiteResults(relTestUrl);
+        }
+    }
+
     @NotNull
     public BuildFinishedStatus call() throws Exception {
-        Collection<String> testsToRun =  getTestRelativeUrls();
+        Collection<String> testsSuitesToRun =  getTestRelativeUrls();
 
-        if (testsToRun.isEmpty()) {
+        if (testsSuitesToRun.isEmpty()) {
             Logger.message("Nothing to run");
             return BuildFinishedStatus.FINISHED_SUCCESS;
         }
-
 
         try {
             //TODO Support detecting free port in range
@@ -244,11 +170,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
                 Logger.progressMessage("Fitnesse ran "+fitProcess.toString());
                 if (waitWhileUnpacking(fitProcess)) {
-                    //TODO Support running multiple tests in parallel
-
-                    for (String relUrl : testsToRun) {
-                        getSuiteResults(relUrl);
-                    }
+                    runSuites(testsSuitesToRun);
 
                     Logger.progressMessage("terminating");
                 }
