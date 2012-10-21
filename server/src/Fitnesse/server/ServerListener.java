@@ -8,9 +8,6 @@ import jetbrains.buildServer.util.EventDispatcher;
 import org.jetbrains.annotations.NotNull;
 import Fitnesse.common.Util;
 
-/**
- * Example server events listener
- */
 public class ServerListener extends BuildServerAdapter {
   private SBuildServer myServer;
 

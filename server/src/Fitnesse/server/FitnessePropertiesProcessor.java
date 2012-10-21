@@ -24,13 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Advard
- * Date: 25.03.12
- * Time: 18:10
- * To change this template use File | Settings | File Templates.
- */
 public class FitnessePropertiesProcessor  implements PropertiesProcessor {
 
     public Collection<InvalidProperty> process(Map<String, String> properties) {
