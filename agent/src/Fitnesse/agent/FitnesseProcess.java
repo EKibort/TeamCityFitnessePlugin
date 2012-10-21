@@ -55,14 +55,14 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return jarFitnesse.getParent();
     }
 
-    private String[] getFitNesseCmd() {
+    private String[] getFitnesseCmd() {
         File jarFitnesse = new File(getParameter("fitnesseJarPath"));
         return new String[] {"java", "-jar", jarFitnesse.getAbsolutePath(), "-p", ""+getPort()};
     }
 
     private Process runFitnesseInstance() {
         try {
-            String[] cmdFitnesse = getFitNesseCmd();
+            String[] cmdFitnesse = getFitnesseCmd();
             String rootFolder = getFitnesseRoot();
             Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'",  Util.join(Arrays.asList(cmdFitnesse), " "), rootFolder));
             return Runtime.getRuntime().exec(cmdFitnesse, null, new File(rootFolder));
@@ -77,9 +77,9 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     public boolean  getSuiteResults(String relUrl) throws MalformedURLException {
         URL pageCmdTarget = getTestAbsoluteUrl(relUrl);
         InputStream  inputStream =null;
-        String suiteName = "FitNesse "+relUrl;
+        String suiteName = "Fitnesse "+relUrl;
         try {
-            Logger.progressMessage("Connnecting to " + pageCmdTarget);
+            Logger.progressMessage("Connecting to " + pageCmdTarget);
             HttpURLConnection connection = (HttpURLConnection) pageCmdTarget.openConnection();
             Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
 
@@ -242,7 +242,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             try {
                 fitProcess = runFitnesseInstance();
 
-                Logger.progressMessage("Fitnesse runned "+fitProcess.toString());
+                Logger.progressMessage("Fitnesse ran "+fitProcess.toString());
                 if (waitWhileUnpacking(fitProcess)) {
                     //TODO Support running multiple tests in parallel
 
@@ -253,7 +253,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                     Logger.progressMessage("terminating");
                 }
                 else {
-                    Logger.error("Could not start fitnesse or interupted");
+                    Logger.error("Could not start fitnesse or interrupted");
                     return  isInterrupted()?BuildFinishedStatus.INTERRUPTED:BuildFinishedStatus.FINISHED_FAILED;
                 }
             }

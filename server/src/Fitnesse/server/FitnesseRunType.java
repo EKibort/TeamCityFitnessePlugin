@@ -42,7 +42,7 @@ public class FitnesseRunType extends RunType{
 
     @Override
     public String getDisplayName() {
-        return "Fitnesse runer";
+        return "Fitnesse runner";
     }
 
     @Override

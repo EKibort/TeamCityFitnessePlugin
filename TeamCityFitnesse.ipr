@@ -239,6 +239,13 @@
   <component name="ProjectDetails">
     <option name="projectName" value="TeamCityFitnesse" />
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="Advard">
+      <words>
+        <w>fitnesse</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/agent/Fitnesse-agent.iml" filepath="$PROJECT_DIR$/agent/Fitnesse-agent.iml" />
