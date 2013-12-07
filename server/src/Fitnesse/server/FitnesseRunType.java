@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class FitnesseRunType extends RunType{
 
-    Map<String, String> _defaultProperties = new HashMap<String, String>();
+    private final Map<String, String> _defaultProperties = new HashMap<String, String>();
 
 
     public FitnesseRunType(final RunTypeRegistry runTypeRegistry) {

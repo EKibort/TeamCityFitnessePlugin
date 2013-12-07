@@ -33,8 +33,7 @@ public abstract class FutureBasedBuildProcess implements BuildProcess, Callable<
     @NotNull
     public BuildFinishedStatus waitFor() throws RunBuildException {
         try {
-            final BuildFinishedStatus status = myFuture.get();
-            return status;
+            return myFuture.get();
         }
         catch (final InterruptedException e) {
             throw new RunBuildException(e);

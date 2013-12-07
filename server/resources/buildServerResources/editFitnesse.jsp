@@ -13,7 +13,7 @@
         <td>
             <props:textProperty name="fitnesseJarPath" />
             <span class="error" id="error_fitnesseJarPath"></span>
-            <span class="smallNote">c:\FTTNESSE\fitnesse.jar</span>
+            <span class="smallNote">c:\FITNESSE\fitnesse.jar</span>
         </td>
     </tr>
     <tr>
@@ -33,7 +33,7 @@
         <td>
             <props:textProperty name="fitnesseTest" />
             <span class="error" id="error_fitnesseTest"></span>
-            <span class="smallNote">TestSuite.SubSuite?sute or TestSuite.SuperTest?test</span>
+            <span class="smallNote">TestSuite.SubSuite?suite or TestSuite.SuperTest?test</span>
         </td>
     </tr>
 </l:settingsGroup>

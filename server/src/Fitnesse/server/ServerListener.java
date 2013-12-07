@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import Fitnesse.common.Util;
 
 public class ServerListener extends BuildServerAdapter {
-  private SBuildServer myServer;
+  private final SBuildServer myServer;
 
   public ServerListener(@NotNull final EventDispatcher<BuildServerListener> dispatcher, SBuildServer server) {
     dispatcher.addListener(this);
@@ -18,6 +18,6 @@ public class ServerListener extends BuildServerAdapter {
 
   @Override
   public void serverStartup() {
-    Loggers.SERVER.info("Plugin '" + Util.NAME + "'. Is running on server version " + myServer.getFullServerVersion() + ".");
+    Loggers.SERVER.info(String.format("Plugin '%s'. Is running on server version %s.", Util.NAME, myServer.getFullServerVersion()));
   }
 }

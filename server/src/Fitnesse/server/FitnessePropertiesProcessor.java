@@ -20,14 +20,12 @@ import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 public class FitnessePropertiesProcessor  implements PropertiesProcessor {
 
     public Collection<InvalidProperty> process(Map<String, String> properties) {
-        List<InvalidProperty> result = new Vector<InvalidProperty>();
-        return result;
+        return new Vector<InvalidProperty>();
     }
 }

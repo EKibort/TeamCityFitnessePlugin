@@ -12,7 +12,7 @@ import javax.xml.stream.events.XMLEvent;
 import java.io.InputStream;
 
 public class XmlResultStreamProcessor implements ResultsStreamProcessor {
-    private ResultReporter reporter;
+    private final ResultReporter reporter;
 
     public XmlResultStreamProcessor(ResultReporter reporter){
         this.reporter = reporter;
@@ -46,7 +46,7 @@ public class XmlResultStreamProcessor implements ResultsStreamProcessor {
                         pageHistoryLink = "";
                     }
                     else if (elName.equalsIgnoreCase("right")) {
-                        //TODO remove dupl
+                        //TODO remove duplication
                         event = xmlReader.nextEvent();
                         String data = event.asCharacters().getData();
                         rightCount = Integer.parseInt(data );

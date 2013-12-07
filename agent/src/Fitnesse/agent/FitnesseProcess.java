@@ -62,7 +62,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         try {
             String[] cmdFitnesse = getFitnesseCmd();
             String rootFolder = getFitnesseRoot();
-            Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'",  Util.join(Arrays.asList(cmdFitnesse), " "), rootFolder));
+            Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'",  Util.join(Arrays.asList(cmdFitnesse)), rootFolder));
             return Runtime.getRuntime().exec(cmdFitnesse, null, new File(rootFolder));
         }
         catch (IOException e) {
@@ -72,14 +72,14 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     }
 
 
-    public boolean  getSuiteResults(String relUrl) throws MalformedURLException {
+    public void  getSuiteResults(String relUrl) throws MalformedURLException {
         URL pageCmdTarget = getTestAbsoluteUrl(relUrl);
         InputStream  inputStream =null;
-        String suiteName = "Fitnesse "+relUrl;
+        String suiteName = String.format("Fitnesse %s", relUrl);
         try {
-            Logger.progressMessage("Connecting to " + pageCmdTarget);
+            Logger.progressMessage(String.format("Connecting to '%s'", pageCmdTarget));
             HttpURLConnection connection = (HttpURLConnection) pageCmdTarget.openConnection();
-            Logger.progressMessage("Connected: " + connection.getResponseCode() + "/" + connection.getResponseMessage());
+            Logger.progressMessage(String.format("Connected: '%d/%s'", connection.getResponseCode(), connection.getResponseMessage()));
 
             inputStream = connection.getInputStream();
             ResultsProcessor.ProcessStream(inputStream );
@@ -98,7 +98,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             }
             Logger.logSuiteFinished(suiteName);
         }
-        return true;
     }
 
     private boolean isLatestLineOfHeader(String lineHeader)
@@ -171,7 +170,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             try {
                 fitProcess = runFitnesseInstance();
 
-                Logger.progressMessage("Fitnesse ran "+fitProcess.toString());
+                Logger.progressMessage(String.format("Fitnesse ran %s", fitProcess.toString()));
                 if (waitWhileUnpacking(fitProcess)) {
                     runSuites(testsSuitesToRun);
 

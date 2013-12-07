@@ -242,6 +242,8 @@
     <dictionary name="Advard">
       <words>
         <w>fitnesse</w>
+        <w>springframework</w>
+        <w>tagdir</w>
       </words>
     </dictionary>
   </component>
