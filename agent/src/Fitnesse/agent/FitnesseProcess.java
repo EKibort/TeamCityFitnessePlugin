@@ -23,8 +23,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     private final static String LOCAL_URL = "http://localhost";
 
     @NotNull
-    private final AgentRunningBuild Build;
-    @NotNull
     private final BuildRunnerContext Context;
     @NotNull
     private final BuildProgressLogger Logger;
@@ -34,7 +32,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
 
     public FitnesseProcess (@NotNull final AgentRunningBuild build, @NotNull final BuildRunnerContext context){
-        Build = build;
         Context = context;
         Logger = build.getBuildLogger();
         ResultsProcessor = ResultsProcessorFactory.getProcessor(Logger);
@@ -48,8 +45,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         final String value = Context.getRunnerParameters().get(parameterName);
         if (value == null || value.trim().length() == 0)
             return defaultValue;
-        String result = value.trim();
-        return result;
+        return value.trim();
     }
 
     private String getFitnesseRoot() {
@@ -97,6 +93,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                     inputStream.close();
                 }
                 catch (Exception e){
+                    Logger.exception(e);
                 }
             }
             Logger.logSuiteFinished(suiteName);
@@ -104,12 +101,18 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return true;
     }
 
+    private boolean isLatestLineOfHeader(String lineHeader)
+    {
+        return lineHeader != null && (
+                lineHeader.contains("page version expiration set to") ||
+               lineHeader.contains("page theme:"));
+    }
+
     private boolean waitWhileUnpacking(Process fitProcess) throws  Exception {
-        InputStream inStream = fitProcess.getInputStream();
         BufferedReader is = new BufferedReader(new InputStreamReader(fitProcess.getInputStream()));
         int timeout = 60;
         int count = 0;
-        String line = "";
+        String line;
         do {
             line = is.readLine();
             if (line != null)
@@ -119,8 +122,8 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                 count++;
             }
 
-        } while (!line.contains("page version expiration set to") && count<timeout && !isInterrupted());
-        return line.contains("page version expiration set to");
+        } while (!isLatestLineOfHeader(line) && count<timeout && !isInterrupted());
+        return isLatestLineOfHeader(line);
     }
 
     private int getPort() {
