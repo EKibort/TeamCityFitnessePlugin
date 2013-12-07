@@ -134,8 +134,9 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
         for(String relUrl :  getParameter(Util.PROPERTY_FITNESSE_TEST, "").split(";")) {
             String trimmedUrl = relUrl.trim();
-            if (!trimmedUrl.isEmpty() && trimmedUrl.indexOf('?') > 0)
+            if (!trimmedUrl.isEmpty() && trimmedUrl.indexOf('?') > 0) {
                 testsRelUrls.add(trimmedUrl);
+            }
         }
         return testsRelUrls;
     }
@@ -170,7 +171,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             try {
                 fitProcess = runFitnesseInstance();
 
-                Logger.progressMessage(String.format("Fitnesse ran %s", fitProcess.toString()));
+                Logger.progressMessage(String.format("Fitnesse ran '%s'", fitProcess.toString()));
                 if (waitWhileUnpacking(fitProcess)) {
                     runSuites(testsSuitesToRun);
 

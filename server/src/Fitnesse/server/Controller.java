@@ -26,9 +26,8 @@ public class Controller extends BaseController {
   @Override
   protected ModelAndView doHandle(@NotNull final HttpServletRequest request, @NotNull final HttpServletResponse response) throws Exception {
     ModelAndView view = new ModelAndView(myPluginDescriptor.getPluginResourcesPath("Fitnesse.jsp"));
-    final Map model = view.getModel();
-      //noinspection unchecked
-      model.put("name", Util.NAME);
+    final Map<java.lang.String,java.lang.Object> model = view.getModel();
+    model.put("name", Util.NAME);
     return view;
   }
 }

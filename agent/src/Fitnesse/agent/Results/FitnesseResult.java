@@ -1,5 +1,7 @@
 package Fitnesse.agent.Results;
 
+import java.util.Map;
+
 public class FitnesseResult {
     private int rightCount = 0;
     private int wrongCount = 0;
@@ -9,16 +11,23 @@ public class FitnesseResult {
     private String relativePageName = "";
     private String pageHistoryLink = "";
 
-    public FitnesseResult(int right, int wrong, int ignore, int exception,
-                int durationMs, String pageName, String historyLink) {
+    public static int parseWithDefault(String number, int defaultVal) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            return defaultVal;
+        }
+    }
 
-        this.rightCount = right;
-        this.wrongCount = wrong;
-        this.ignoresCount = ignore;
-        this.exceptionsCount = exception;
-        this.runTimeInMillis = durationMs;
-        this.relativePageName = pageName;
-        this.pageHistoryLink =  historyLink;
+    public FitnesseResult(Map<String, String> map)
+    {
+        this.rightCount = parseWithDefault(map.get("right"),0);
+        this.wrongCount = parseWithDefault(map.get("wrong"),0);
+        this.ignoresCount = parseWithDefault(map.get("ignores"),0);
+        this.exceptionsCount = parseWithDefault(map.get("exceptions"),0);
+        this.runTimeInMillis = parseWithDefault(map.get("runTimeInMillis"),0);
+        this.relativePageName = map.get("relativePageName");
+        this.pageHistoryLink  = map.get("pageHistoryLink");
     }
 
     public int getRights(){
