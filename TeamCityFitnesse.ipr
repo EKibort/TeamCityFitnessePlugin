@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AntConfiguration">
-    <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/build.xml">
-      <additionalClassPath />
-      <antReference projectDefault="true" />
-      <customJdkName value="" />
       <maximumHeapSize value="176" />
       <maximumStackSize value="32" />
-      <properties />
     </buildFile>
   </component>
   <component name="BuildJarProjectSettings">
@@ -35,7 +30,11 @@
       <entry name="?*.jsp" />
       <entry name="?*.js" />
     </wildcardResourcePatterns>
-    <annotationProcessing enabled="false" useClasspath="true" />
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
   </component>
   <component name="CopyrightManager" default="">
     <copyright>
@@ -238,6 +237,15 @@
   </component>
   <component name="ProjectDetails">
     <option name="projectName" value="TeamCityFitnesse" />
+  </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="Advard">
+      <words>
+        <w>fitnesse</w>
+        <w>springframework</w>
+        <w>tagdir</w>
+      </words>
+    </dictionary>
   </component>
   <component name="ProjectModuleManager">
     <modules>

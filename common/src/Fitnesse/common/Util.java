@@ -15,15 +15,15 @@ public class Util {
   public final static String PROPERTY_FITNESSE_TEST = "fitnesseTest";
 
 
-  public static String join(Collection<?> s, String delimiter) {
+  public static String join(Collection<?> s) {
         StringBuilder builder = new StringBuilder();
-        Iterator iter = s.iterator();
-        while (iter.hasNext()) {
-            builder.append(iter.next());
-            if (!iter.hasNext()) {
+        Iterator iterator = s.iterator();
+        while (iterator.hasNext()) {
+            builder.append(iterator.next());
+            if (!iterator.hasNext()) {
                 break;
             }
-            builder.append(delimiter);
+            builder.append(" ");
         }
         return builder.toString();
     }

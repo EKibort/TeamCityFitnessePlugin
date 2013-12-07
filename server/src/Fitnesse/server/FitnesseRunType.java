@@ -25,16 +25,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Advard
- * Date: 25.03.12
- * Time: 17:57
- * To change this template use File | Settings | File Templates.
- */
 public class FitnesseRunType extends RunType{
 
-    Map<String, String> _defaultProperties = new HashMap<String, String>();
+    private final Map<String, String> _defaultProperties = new HashMap<String, String>();
 
 
     public FitnesseRunType(final RunTypeRegistry runTypeRegistry) {
@@ -49,7 +42,7 @@ public class FitnesseRunType extends RunType{
 
     @Override
     public String getDisplayName() {
-        return "Fitnesse runer";
+        return "Fitnesse runner";
     }
 
     @Override
