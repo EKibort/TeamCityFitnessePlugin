@@ -100,29 +100,31 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         }
     }
 
-    private boolean isLatestLineOfHeader(String lineHeader)
-    {
-        return lineHeader != null && (
-                lineHeader.contains("page version expiration set to") ||
-               lineHeader.contains("page theme:"));
+    private int GetServerResponseCode() throws MalformedURLException {
+        URL pageCmdTarget = getFitnesseRootUrl();
+        try {
+            HttpURLConnection connection = (HttpURLConnection) pageCmdTarget.openConnection();
+            connection.setRequestMethod ("GET");
+            connection.connect ();
+            int code = connection.getResponseCode();
+            connection.disconnect();
+            Logger.progressMessage("\t response:"+code);
+            return code;
+        }
+        catch (Exception ex) {
+            Logger.progressMessage("\t response:"+ex.getMessage());
+            return -1;
+        }
     }
 
-    private boolean waitWhileUnpacking(Process fitProcess) throws  Exception {
-        BufferedReader is = new BufferedReader(new InputStreamReader(fitProcess.getInputStream()));
-        int timeout = 60;
-        int count = 0;
-        String line;
-        do {
-            line = is.readLine();
-            if (line != null)
-                Logger.progressMessage("\t"+line);
-            else {
-                Thread.sleep(1000);
-                count++;
-            }
-
-        } while (!isLatestLineOfHeader(line) && count<timeout && !isInterrupted());
-        return isLatestLineOfHeader(line);
+    private boolean waitWhileUnpackingByCode() throws MalformedURLException, InterruptedException {
+        long timeout = System.currentTimeMillis() + 60*1000;
+        Logger.progressMessage("Fitnesse starting...");
+        while (GetServerResponseCode() != 200 && System.currentTimeMillis() < timeout)
+        {
+            Thread.sleep(1000);
+        }
+        return GetServerResponseCode() == 200 ;
     }
 
     private int getPort() {
@@ -141,10 +143,14 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return testsRelUrls;
     }
 
-    private URL getTestAbsoluteUrl(String relUrl) throws MalformedURLException {
-        return new URL(String.format("%s:%d/%s&format=xml",LOCAL_URL, getPort(), relUrl));
+    private URL getFitnesseRootUrl()throws MalformedURLException {
+        return new URL(String.format("%s:%d/",LOCAL_URL, getPort()));
     }
 
+    private URL getTestAbsoluteUrl(String relUrl) throws MalformedURLException {
+
+        return new URL(String.format("%s%s&format=xml",getFitnesseRootUrl(), relUrl));
+    }
 
     private void runSuites(Collection<String> relTestUrls) throws Exception {
         //TODO Support running multiple tests in parallel
@@ -171,8 +177,8 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             try {
                 fitProcess = runFitnesseInstance();
 
-                Logger.progressMessage(String.format("Fitnesse ran '%s'", fitProcess.toString()));
-                if (waitWhileUnpacking(fitProcess)) {
+                Logger.progressMessage("Fitnesse ran");
+                if (waitWhileUnpackingByCode()) {
                     runSuites(testsSuitesToRun);
 
                     Logger.progressMessage("terminating");
