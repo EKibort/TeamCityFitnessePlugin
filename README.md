@@ -9,7 +9,7 @@ get compiled Fitnesse.zip from dist folder
 
 ### Instalation
 
-copy Fitnesse.zip to plugins directory (for windows %USERPROFILE%\.BuildServer\plugins) and resart TeamCity server
+copy Fitnesse.zip to plugins directory (for windows %USERPROFILE%\.BuildServer\plugins) and restart TeamCity server
 
 ### Using
 
