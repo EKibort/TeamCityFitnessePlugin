@@ -18,6 +18,15 @@
     </tr>
     <tr>
         <th>
+            <label for="fitnesseRoot">Root folder: </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseRoot" />
+            <span class="error" id="error_fitnesseRoot"></span>
+        </td>
+    </tr>
+    <tr>
+        <th>
             <label for="fitnessePort">Port: </label>
         </th>
         <td>

@@ -55,7 +55,8 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
     private String[] getFitnesseCmd() {
         File jarFitnesse = new File(getParameter("fitnesseJarPath"));
-        return new String[] {"java", "-jar", jarFitnesse.getAbsolutePath(), "-p", ""+getPort()};
+        String rootPageFolder = getParameter("fitnesseRoot");
+        return new String[] {"java", "-jar", jarFitnesse.getAbsolutePath(), "-d", rootPageFolder, "-p", ""+getPort()};
     }
 
     private Process runFitnesseInstance() {
