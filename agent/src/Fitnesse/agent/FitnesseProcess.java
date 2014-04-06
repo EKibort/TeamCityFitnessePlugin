@@ -100,25 +100,29 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         }
     }
 
-    private int GetServerResponseCode() throws MalformedURLException {
-        URL pageCmdTarget = getFitnesseRootUrl();
+    public int ping(URL url, int timeout) {
+
         try {
-            HttpURLConnection connection = (HttpURLConnection) pageCmdTarget.openConnection();
-            connection.setRequestMethod ("GET");
-            connection.connect ();
-            int code = connection.getResponseCode();
-            connection.disconnect();
-            Logger.progressMessage("\t response:"+code);
-            return code;
-        }
-        catch (Exception ex) {
-            Logger.progressMessage("\t response:"+ex.getMessage());
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(timeout);
+            connection.setReadTimeout(timeout);
+            connection.setRequestMethod("HEAD");
+            int responseCode = connection.getResponseCode();
+            Logger.progressMessage(String.format("\t response from (%s): %d", url.toString(), responseCode));
+            return responseCode;
+        } catch (IOException exception) {
+            Logger.progressMessage(String.format("\t response from (%s): %s", url.toString(), exception.getMessage()));
             return -1;
         }
     }
 
+    private int GetServerResponseCode() throws MalformedURLException {
+        int code =  ping(getFitnesseRootUrl(), 500);
+        return code;
+    }
+
     private boolean waitWhileUnpackingByCode() throws MalformedURLException, InterruptedException {
-        long timeout = System.currentTimeMillis() + 60*1000;
+        long timeout = System.currentTimeMillis() + 3*60*1000;
         Logger.progressMessage("Fitnesse starting...");
         while (GetServerResponseCode() != 200 && System.currentTimeMillis() < timeout)
         {
@@ -159,6 +163,11 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         }
     }
 
+    static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
     @NotNull
     public BuildFinishedStatus call() throws Exception {
         Collection<String> testsSuitesToRun =  getTestRelativeUrls();
@@ -190,7 +199,11 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             }
             finally {
                 if (fitProcess != null)
+                {
                     fitProcess.destroy();
+                    Logger.message("STDOUT:"+convertStreamToString(fitProcess.getInputStream()));
+                    Logger.message("STDERR:"+convertStreamToString(fitProcess.getErrorStream()));
+                }
             }
 
             return BuildFinishedStatus.FINISHED_SUCCESS;
