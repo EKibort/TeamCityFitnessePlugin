@@ -1,18 +1,18 @@
 This plugin helps with integration of FitNesse test and TeamCity.
 
-Build
------
+### Build
+
 You should have installed TeamCity, JAVA, ANT
 run ant in root directory
 get compiled Fitnesse.zip from dist folder
 
 
-Instalation
-------------
-copy Fitnesse.zip to plugins directory (for windows %USERPROFILE%\.BuildServer\plugins) and resart TeamCity server
+### Instalation
 
-Using
------
+copy Fitnesse.zip to plugins directory (for windows %USERPROFILE%\.BuildServer\plugins) and restart TeamCity server
+
+### Using
+
 Add "Fitnesse runer" build step 
 
 Parameters:
@@ -26,3 +26,4 @@ If you have any questions feel free to ask me
 
 
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/EKibort/teamcityfitnesseplugin/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
