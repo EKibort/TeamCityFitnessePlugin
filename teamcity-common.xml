@@ -251,6 +251,7 @@
 
   <target name="prepare.agent.part" if="agent.needed">
     <!-- prepare.agent.part -->
+		
     <mkdir dir="${teamcity.internal.distrib.prep.agent}"/>
     <mkdir dir="${teamcity.internal.distrib.prep.agent.jars}/${name}/lib"/>
     <mkdir dir="${out.unpacked}/agent"/>
@@ -259,10 +260,14 @@
       <fileset dir="${agent.output}"/>
     </jar>
 
-    <copy todir="${teamcity.internal.distrib.prep.agent.jars}/${name}/lib" failonerror="false">
+	<copy todir="${teamcity.internal.distrib.prep.agent.jars}/${name}/lib" failonerror="false">
       <fileset file="${common.jar.path}"/>
     </copy>
-  </target>
+	
+	<copy todir="${teamcity.internal.distrib.prep.agent.jars}/${name}/lib" failonerror="false">
+      <fileset dir="${basedir}" includes="fitnesse-standalone.jar"/>
+    </copy>
+   </target>
 
   <target name="prepare.plugin.descriptor.file" if="plugin.descriptor.file.needed">
     <echo message="Copying plugin descriptor file '${source}' to '${dest}'."/>

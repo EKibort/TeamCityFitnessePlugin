@@ -49,21 +49,48 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     }
 
     private String getFitnesseRoot() {
-        File jarFitnesse = new File(getParameter("fitnesseJarPath"));
-        return jarFitnesse.getParent();
+
+        String fitnesseRoot = getParameter("fitnesseRoot");
+
+        if(fitnesseRoot == null || fitnesseRoot.isEmpty())
+        {
+            File jarFitnesse = new File(getParameter("fitnesseJarPath"));
+            return jarFitnesse.getParent();
+        }
+
+        return fitnesseRoot;
+    }
+
+    private String getWorkingDirectory() {
+
+        String workingDirectory = getParameter("workingDirectory");
+
+        if(workingDirectory == null || workingDirectory.isEmpty())
+        {
+            File jarFitnesse = new File(getParameter("fitnesseJarPath"));
+            return jarFitnesse.getParent();
+        }
+
+        return workingDirectory;
     }
 
     private String[] getFitnesseCmd() {
         File jarFitnesse = new File(getParameter("fitnesseJarPath"));
-        return new String[] {"java", "-jar", jarFitnesse.getAbsolutePath(), "-p", ""+getPort()};
+        return new String[] {"java", "-jar", jarFitnesse.getAbsolutePath(), "-p", ""+getPort(), "-d", ""+getFitnesseRoot()};
     }
 
-    private Process runFitnesseInstance() {
+    private Process runFitnesseInstance(){
         try {
             String[] cmdFitnesse = getFitnesseCmd();
             String rootFolder = getFitnesseRoot();
-            Logger.progressMessage(String.format("Running fitnesse use cmd '%s' in '%s'",  Util.join(Arrays.asList(cmdFitnesse)), rootFolder));
-            return Runtime.getRuntime().exec(cmdFitnesse, null, new File(rootFolder));
+            String workingDirectory = getWorkingDirectory();
+            Logger.progressMessage(String.format("Running fitnesse with cmd '%s' in working directory: '%s'",  Util.join(Arrays.asList(cmdFitnesse)), workingDirectory));
+
+            ProcessBuilder builder = new ProcessBuilder(cmdFitnesse);
+            builder.directory(new File(rootFolder));
+            builder.redirectErrorStream(true);
+            Process process = builder.start();
+            return process;
         }
         catch (IOException e) {
             Logger.exception(e);

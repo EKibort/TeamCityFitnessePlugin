@@ -18,6 +18,24 @@
     </tr>
     <tr>
         <th>
+            <label for="fitnesseRoot">Fitnesse root folder: </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseRoot" />
+            <span class="error" id="error_fitnesseRoot"></span>
+        </td>
+    </tr>
+    <tr>
+            <th>
+                <label for="workingDirectory">Fitnesse Working Directory: </label>
+            </th>
+            <td>
+                <props:textProperty name="workingDirectory" />
+                <span class="error" id="error_workingDirectory"></span>
+            </td>
+        </tr>
+    <tr>
+        <th>
             <label for="fitnessePort">Port: </label>
         </th>
         <td>
