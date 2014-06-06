@@ -49,34 +49,33 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     }
 
     private String getFitnesseRoot() {
-
-        String fitnesseRoot = getParameter("fitnesseRoot");
-
-        if(fitnesseRoot == null || fitnesseRoot.isEmpty())
-        {
-            File jarFitnesse = new File(getParameter("fitnesseJarPath"));
-            return jarFitnesse.getParent();
-        }
-
+        String fitnesseRoot = ifStringIsEmptyReturnDefaultDirectory(getParameter("fitnesseRoot"));
         return fitnesseRoot;
     }
 
     private String getWorkingDirectory() {
+        String workingDirectory = ifStringIsEmptyReturnDefaultDirectory(getParameter("workingDirectory"));
+        return workingDirectory;
+    }
 
-        String workingDirectory = getParameter("workingDirectory");
+    private String getFitnesseWorkingDirectory() {
+        String fitnesseWorkingDirectory = ifStringIsEmptyReturnDefaultDirectory(getParameter("fitnesseWorkingDirectory"));
+        return fitnesseWorkingDirectory;
+    }
 
-        if(workingDirectory == null || workingDirectory.isEmpty())
+    private String ifStringIsEmptyReturnDefaultDirectory(String stringToCheck){
+        if(stringToCheck == null || stringToCheck.isEmpty())
         {
             File jarFitnesse = new File(getParameter("fitnesseJarPath"));
             return jarFitnesse.getParent();
         }
 
-        return workingDirectory;
+        else return stringToCheck;
     }
 
     private String[] getFitnesseCmd() {
         File jarFitnesse = new File(getParameter("fitnesseJarPath"));
-        return new String[] {"java", "-jar", jarFitnesse.getAbsolutePath(), "-p", ""+getPort(), "-d", ""+getFitnesseRoot()};
+        return new String[] {"java", "-jar", jarFitnesse.getAbsolutePath(), "-p", ""+getPort(), "-d", ""+ getFitnesseWorkingDirectory(), "-r", ""+getFitnesseRoot()};
     }
 
     private Process runFitnesseInstance(){
@@ -84,11 +83,12 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             String[] cmdFitnesse = getFitnesseCmd();
             String rootFolder = getFitnesseRoot();
             String workingDirectory = getWorkingDirectory();
+            String fitnesseWorkingDirectory = getFitnesseWorkingDirectory();
             Logger.progressMessage(String.format("Running fitnesse with cmd '%s' in working directory: '%s'",  Util.join(Arrays.asList(cmdFitnesse)), workingDirectory));
 
             ProcessBuilder builder = new ProcessBuilder(cmdFitnesse);
-            builder.directory(new File(rootFolder));
-            builder.redirectErrorStream(true);
+            builder.directory(new File(workingDirectory));
+
             Process process = builder.start();
             return process;
         }
@@ -109,7 +109,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Logger.progressMessage(String.format("Connected: '%d/%s'", connection.getResponseCode(), connection.getResponseMessage()));
 
             inputStream = connection.getInputStream();
-            ResultsProcessor.ProcessStream(inputStream );
+            ResultsProcessor.ProcessStream(inputStream);
         }
         catch (Exception ex) {
             Logger.exception(ex);
@@ -203,8 +203,10 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
             try {
                 fitProcess = runFitnesseInstance();
-
                 Logger.progressMessage("Fitnesse ran");
+
+                attachLoggersToProcess(fitProcess);
+
                 if (waitWhileUnpackingByCode()) {
                     runSuites(testsSuitesToRun);
 
@@ -227,4 +229,15 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             return BuildFinishedStatus.FINISHED_FAILED;
         }
     }
+
+    private void attachLoggersToProcess(Process fitProcess) {
+        // any error message?
+        StreamLogger errorGobbler = new StreamLogger(fitProcess.getErrorStream(), "ERROR", Logger);
+        // any output?
+        StreamLogger outputGobbler = new StreamLogger(fitProcess.getInputStream(), "OUTPUT", Logger);
+        // kick them off
+        errorGobbler.start();
+        outputGobbler.start();
+    }
 }
+

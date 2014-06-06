@@ -16,18 +16,9 @@
             <span class="smallNote">c:\FITNESSE\fitnesse.jar</span>
         </td>
     </tr>
-    <tr>
-        <th>
-            <label for="fitnesseRoot">Fitnesse root folder: </label>
-        </th>
-        <td>
-            <props:textProperty name="fitnesseRoot" />
-            <span class="error" id="error_fitnesseRoot"></span>
-        </td>
-    </tr>
-    <tr>
+     <tr>
             <th>
-                <label for="workingDirectory">Fitnesse Working Directory: </label>
+                <label for="workingDirectory">Working Directory (Directory to launch fitnesse executable from): </label>
             </th>
             <td>
                 <props:textProperty name="workingDirectory" />
@@ -35,6 +26,24 @@
             </td>
         </tr>
     <tr>
+        <th>
+            <label for="fitnesseWorkingDirectory">Fitnesse Working Directory (Directory to give fitnesse with -d parameter): </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseWorkingDirectory" />
+            <span class="error" id="error_fitnesseWorkingDirectory"></span>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <label for="fitnesseRoot">Fitnesse root folder (relative to the working directory. Given to fitnesse as -r parameter. default: FitNesseRoot): </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseRoot"  />
+            <span class="error" id="error_fitnesseRoot"></span>
+        </td>
+    </tr>
+
         <th>
             <label for="fitnessePort">Port: </label>
         </th>

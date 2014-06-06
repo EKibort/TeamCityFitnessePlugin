@@ -1,9 +1,5 @@
 package Fitnesse.agent.Results;
-
-import Fitnesse.agent.Results.FitnesseResult;
-import Fitnesse.agent.Results.ResultReporter;
-import Fitnesse.agent.Results.ResultsStreamProcessor;
-
+import jetbrains.buildServer.agent.BuildProgressLogger;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.events.EndElement;
@@ -18,9 +14,11 @@ public class XmlResultStreamProcessor implements ResultsStreamProcessor {
     private static final Set<String> RESULT_KEYS_SET = new HashSet<String>(Arrays.asList(RESULT_KEYS));
 
     private final ResultReporter reporter;
+    private BuildProgressLogger logger;
 
-    public XmlResultStreamProcessor(ResultReporter reporter){
+    public XmlResultStreamProcessor(ResultReporter reporter, BuildProgressLogger logger){
         this.reporter = reporter;
+        this.logger = logger;
     }
 
     public void ProcessStream(InputStream stream) {
@@ -31,6 +29,7 @@ public class XmlResultStreamProcessor implements ResultsStreamProcessor {
 
             while (xmlReader.hasNext()) {
                 XMLEvent event = xmlReader.nextEvent();
+
                 if (event.isStartElement()) {
                     StartElement startElement = event.asStartElement();
                     String elName = startElement.getName().getLocalPart();
