@@ -106,7 +106,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(timeout);
             connection.setReadTimeout(timeout);
-            connection.setRequestMethod("HEAD");
+            connection.setRequestMethod("GET");
             int responseCode = connection.getResponseCode();
             Logger.progressMessage(String.format("\t response from (%s): %d", url.toString(), responseCode));
             return responseCode;
