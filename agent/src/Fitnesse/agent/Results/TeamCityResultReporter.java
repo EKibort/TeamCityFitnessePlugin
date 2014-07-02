@@ -23,6 +23,10 @@ public class TeamCityResultReporter implements ResultReporter {
 
             if ((result.getWrongs() >0) || (result.getExceptions() > 0)) {
                 Logger.logTestFailed(testName, String.format("wrong:%d  exception:%d", result.getWrongs(), result.getExceptions()), "" );
+                if(result.getExceptions()>0)
+                {
+                    Logger.progressMessage(result.getContent());
+                }
             }
 
             Logger.logTestFinished(testName,  new Date());

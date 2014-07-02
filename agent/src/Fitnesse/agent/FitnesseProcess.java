@@ -81,9 +81,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     private Process runFitnesseInstance(){
         try {
             String[] cmdFitnesse = getFitnesseCmd();
-            String rootFolder = getFitnesseRoot();
             String workingDirectory = getWorkingDirectory();
-            String fitnesseWorkingDirectory = getFitnesseWorkingDirectory();
             Logger.progressMessage(String.format("Running fitnesse with cmd '%s' in working directory: '%s'",  Util.join(Arrays.asList(cmdFitnesse)), workingDirectory));
 
             ProcessBuilder builder = new ProcessBuilder(cmdFitnesse);
