@@ -10,7 +10,6 @@ public class FitnesseResult {
     private int runTimeInMillis = 0;
     private String relativePageName = "";
     private String pageHistoryLink = "";
-    private String content = "";
 
     public static int parseWithDefault(String number, int defaultVal) {
         try {
@@ -20,47 +19,41 @@ public class FitnesseResult {
         }
     }
 
-    public FitnesseResult(Map<String, String> map)
-    {
-        this.rightCount = parseWithDefault(map.get("right"),0);
-        this.wrongCount = parseWithDefault(map.get("wrong"),0);
-        this.ignoresCount = parseWithDefault(map.get("ignores"),0);
-        this.exceptionsCount = parseWithDefault(map.get("exceptions"),0);
-        this.runTimeInMillis = parseWithDefault(map.get("runTimeInMillis"),0);
+    public FitnesseResult(Map<String, String> map) {
+        this.rightCount = parseWithDefault(map.get("right"), 0);
+        this.wrongCount = parseWithDefault(map.get("wrong"), 0);
+        this.ignoresCount = parseWithDefault(map.get("ignores"), 0);
+        this.exceptionsCount = parseWithDefault(map.get("exceptions"), 0);
+        this.runTimeInMillis = parseWithDefault(map.get("runTimeInMillis"), 0);
         this.relativePageName = map.get("relativePageName");
-        this.pageHistoryLink  = map.get("pageHistoryLink");
-        this.content = map.get("content");
+        this.pageHistoryLink = map.get("pageHistoryLink");
     }
 
-    public int getRights(){
+    public int getRights() {
         return this.rightCount;
     }
 
-    public int getWrongs(){
+    public int getWrongs() {
         return this.wrongCount;
     }
 
-    public int getIgnores(){
+    public int getIgnores() {
         return this.ignoresCount;
     }
 
-    public int getExceptions(){
+    public int getExceptions() {
         return this.exceptionsCount;
     }
 
-    public int getDurationMs(){
+    public int getDurationMs() {
         return this.runTimeInMillis;
     }
 
-    public String getPageName(){
+    public String getPageName() {
         return this.relativePageName;
     }
 
-    public String getHistoryLink(){
+    public String getHistoryLink() {
         return this.pageHistoryLink;
-    }
-
-    public String getContent(){
-        return this.content;
     }
 }

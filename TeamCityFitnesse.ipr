@@ -252,6 +252,7 @@
       <module fileurl="file://$PROJECT_DIR$/agent/Fitnesse-agent.iml" filepath="$PROJECT_DIR$/agent/Fitnesse-agent.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/Fitnesse-common.iml" filepath="$PROJECT_DIR$/common/Fitnesse-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/Fitnesse-server.iml" filepath="$PROJECT_DIR$/server/Fitnesse-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Fitnesse-agent.Tests/Fitnesse-tests.iml" filepath="$PROJECT_DIR$/Fitnesse-agent.Tests/Fitnesse-tests.iml" />
     </modules>
   </component>
   <component name="ProjectResources">
@@ -275,6 +276,14 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
+    <library name="org.mockito:mockito-all:1.9.5" type="repository">
+      <properties maven-id="org.mockito:mockito-all:1.9.5" />
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib-compile/mockito-all-1.9.5.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="TeamCity Open API agent">
       <CLASSES>
         <root url="jar://$TeamCityDistribution$/devPackage/agent-api.jar!/" />

@@ -22,11 +22,9 @@ public class TeamCityResultReporter implements ResultReporter {
             Logger.logTestStarted(testName, new Date(System.currentTimeMillis()-result.getDurationMs()));
 
             if ((result.getWrongs() >0) || (result.getExceptions() > 0)) {
-                Logger.logTestFailed(testName, String.format("wrong:%d  exception:%d", result.getWrongs(), result.getExceptions()), "" );
-                if(result.getExceptions()>0)
-                {
-                    Logger.progressMessage(result.getContent());
-                }
+
+                String errorMessage =String.format("wrong:%d  exception:%d", result.getWrongs(), result.getExceptions());
+                Logger.logTestFailed(testName, errorMessage, "");
             }
 
             Logger.logTestFinished(testName,  new Date());

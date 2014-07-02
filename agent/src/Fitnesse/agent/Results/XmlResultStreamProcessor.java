@@ -10,7 +10,7 @@ import java.util.*;
 
 public class XmlResultStreamProcessor implements ResultsStreamProcessor {
 
-    private static final String[] RESULT_KEYS = new String[] { "right", "wrong", "ignores", "exceptions", "runTimeInMillis", "relativePageName", "pageHistoryLink" };
+    private static final String[] RESULT_KEYS = new String[] { "right", "wrong", "ignores", "exceptions", "runTimeInMillis", "relativePageName", "pageHistoryLink", "content" };
     private static final Set<String> RESULT_KEYS_SET = new HashSet<String>(Arrays.asList(RESULT_KEYS));
 
     private final ResultReporter reporter;
@@ -23,7 +23,10 @@ public class XmlResultStreamProcessor implements ResultsStreamProcessor {
 
     public void ProcessStream(InputStream stream) {
         try {
-            XMLEventReader xmlReader  = XMLInputFactory.newInstance().createXMLEventReader(stream);
+            XMLInputFactory xMLInputFactory = XMLInputFactory.newInstance();
+            xMLInputFactory.setProperty("javax.xml.stream.isCoalescing", true);
+
+            XMLEventReader xmlReader  = xMLInputFactory.createXMLEventReader(stream);
 
             Map<String, String> resultsMap = new HashMap<String, String>();
 
