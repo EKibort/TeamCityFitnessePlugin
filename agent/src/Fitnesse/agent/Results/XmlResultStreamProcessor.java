@@ -11,6 +11,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.InputStream;
 import java.util.*;
+import java.net.URL;
 
 public class XmlResultStreamProcessor implements ResultsStreamProcessor {
 
@@ -23,11 +24,12 @@ public class XmlResultStreamProcessor implements ResultsStreamProcessor {
         this.reporter = reporter;
     }
 
-    public void ProcessStream(InputStream stream) {
+    public void ProcessStream(InputStream stream, URL url) {
         try {
             XMLEventReader xmlReader  = XMLInputFactory.newInstance().createXMLEventReader(stream);
 
             Map<String, String> resultsMap = new HashMap<String, String>();
+	    resultsMap.put("suiteUrl", url.getPath());
 
             while (xmlReader.hasNext()) {
                 XMLEvent event = xmlReader.nextEvent();
