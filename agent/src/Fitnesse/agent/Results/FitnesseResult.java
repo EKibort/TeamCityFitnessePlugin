@@ -10,6 +10,7 @@ public class FitnesseResult {
     private int runTimeInMillis = 0;
     private String relativePageName = "";
     private String pageHistoryLink = "";
+    private String suiteUrl = "";
 
     public static int parseWithDefault(String number, int defaultVal) {
         try {
@@ -28,6 +29,7 @@ public class FitnesseResult {
         this.runTimeInMillis = parseWithDefault(map.get("runTimeInMillis"),0);
         this.relativePageName = map.get("relativePageName");
         this.pageHistoryLink  = map.get("pageHistoryLink");
+        this.suiteUrl  = map.get("suiteUrl");
     }
 
     public int getRights(){
@@ -55,6 +57,8 @@ public class FitnesseResult {
     }
 
     public String getHistoryLink(){
+	if (this.pageHistoryLink == null || this.pageHistoryLink.trim().length() == 0)
+		return this.suiteUrl;
         return this.pageHistoryLink;
     }
 }
