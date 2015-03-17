@@ -141,10 +141,10 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                 int portTo = Integer.parseInt(portsArr[1]);
                 Random random = new Random();
                 // Try and find an available port in the range given
-                int port = random.nextInt(portFrom - portTo) + portFrom;
+                int port = random.nextInt(portTo - portFrom) + portFrom;
                 while (!isPortAvailable(port))
                 {
-                    port = random.nextInt(portFrom - portTo) + portFrom;
+                    port = random.nextInt(portTo - portFrom) + portFrom;
                 }
                 return port;
             }
