@@ -132,7 +132,38 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     }
 
     private int getPort() {
-        return Integer.parseInt(getParameter(Util.PROPERTY_FITNESSE_PORT));
+        String portText = getParameter(Util.PROPERTY_FITNESSE_PORT);
+        if (portText.contains("-")) {
+            // We have a range of ports
+            String portsArr = portText.split("-")
+            if (portsArr.length == 2) {
+                int portFrom = Integer.parseInt(portsArr[0]);
+                int portTo = Integer.parseInt(portsArr[1]);
+                Random random = new Random();
+                // Try and find an available port in the range given
+                int port = random.nextInt(portFrom - portTo) + portTo;
+                while (!isPortAvailable(port))
+                {
+                    port = random.nextInt(portFrom - portTo) + portTo;
+                }
+                return port;
+            }
+        }
+        return Integer.parseInt(portText);
+    }
+
+    private boolean isPortAvailable(int port) {
+        try {
+            ServerSocket socket = new ServerSocket(port);
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                // Ignore IOException on close()
+                }
+                return true;
+        } catch (IOException ex) {
+            return false;
+            }
     }
 
     private Collection<String> getTestRelativeUrls() {
@@ -178,7 +209,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         }
 
         try {
-            //TODO Support detecting free port in range
             //TODO detect fitnesse version
             //TODO add http timeout
             Process fitProcess = null;
