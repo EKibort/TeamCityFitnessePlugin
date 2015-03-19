@@ -13,10 +13,12 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ServerSocket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Random;
 
 public class FitnesseProcess extends  FutureBasedBuildProcess {
 
@@ -135,7 +137,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         String portText = getParameter(Util.PROPERTY_FITNESSE_PORT);
         if (portText.contains("-")) {
             // We have a range of ports
-            String portsArr = portText.split("-")
+            String[] portsArr = portText.split("-");
             if (portsArr.length == 2) {
                 int portFrom = Integer.parseInt(portsArr[0]);
                 int portTo = Integer.parseInt(portsArr[1]);
