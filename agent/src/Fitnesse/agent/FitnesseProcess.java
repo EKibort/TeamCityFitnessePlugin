@@ -34,7 +34,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     public FitnesseProcess (@NotNull final AgentRunningBuild build, @NotNull final BuildRunnerContext context){
         Context = context;
         Logger = build.getBuildLogger();
-        ResultsProcessor = ResultsProcessorFactory.getProcessor(Logger);
+        ResultsProcessor = ResultsProcessorFactory.getProcessor(Logger, Context.getBuild().getBuildTempDirectory());
     }
 
     private String getParameter(@NotNull final String parameterName) {

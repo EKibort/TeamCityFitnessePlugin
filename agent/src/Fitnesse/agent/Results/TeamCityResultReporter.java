@@ -13,6 +13,35 @@ public class TeamCityResultReporter implements ResultReporter {
         this.Logger = logger;
     }
 
+    public void StartRunning()
+    {
+        Logger.logSuiteStarted("FitNesse");
+    }
+
+    public void FinishRunning()
+    {
+        Logger.logSuiteFinished("FitNesse");
+    }
+
+    public void Start(String testName) {
+        Logger.logTestStarted(testName);
+    }
+
+    public void Finish(FitnesseResult result) {
+        String testName = result.getHistoryLink();
+        if ((result.getRights() == 0) && (result.getWrongs() ==0) && (result.getExceptions() == 0)) {
+            Logger.logTestIgnored(testName, "empty test");
+        }
+        else {
+            if ((result.getWrongs() >0) || (result.getExceptions() > 0)) {
+                Logger.logTestFailed(testName, String.format("wrong:%d  exception:%d", result.getWrongs(), result.getExceptions()), "" );
+            }
+
+            Logger.logTestFinished(testName);
+        }
+    }
+
+
     public void Report(FitnesseResult result) {
         String testName = result.getHistoryLink();
         if ((result.getRights() == 0) && (result.getWrongs() ==0) && (result.getExceptions() == 0)) {
