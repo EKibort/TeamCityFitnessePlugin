@@ -23,7 +23,7 @@
         <td>
             <props:textProperty name="fitnessePort" />
             <span class="error" id="error_fitnessePort"></span>
-            <span class="smallNote">8080</span>
+            <span class="smallNote">8080 or range like 8080-8090</span>
         </td>
     </tr>
     <tr>

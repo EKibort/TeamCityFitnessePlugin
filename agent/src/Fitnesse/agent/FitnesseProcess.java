@@ -31,12 +31,15 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     @NotNull
     private  final ResultsStreamProcessor ResultsProcessor;
 
+    private int Port;
+
 
 
     public FitnesseProcess (@NotNull final AgentRunningBuild build, @NotNull final BuildRunnerContext context){
         Context = context;
         Logger = build.getBuildLogger();
         ResultsProcessor = ResultsProcessorFactory.getProcessor(Logger);
+        Port = -1;
     }
 
     private String getParameter(@NotNull final String parameterName) {
@@ -134,6 +137,13 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     }
 
     private int getPort() {
+        if (this.Port == -1) {
+            this.Port = detectPort();
+        }	
+        return this.Port;
+    }
+
+    private int detectPort() {
         String portText = getParameter(Util.PROPERTY_FITNESSE_PORT);
         if (portText.contains("-")) {
             // We have a range of ports
@@ -144,8 +154,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                 Random random = new Random();
                 // Try and find an available port in the range given
                 int port = random.nextInt(portTo - portFrom) + portFrom;
-                while (!isPortAvailable(port))
-                {
+                while (!isPortAvailable(port)) {
                     port = random.nextInt(portTo - portFrom) + portFrom;
                 }
                 return port;
