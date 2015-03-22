@@ -31,12 +31,15 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     @NotNull
     private  final ResultsStreamProcessor ResultsProcessor;
 
+    private int Port;
+
 
 
     public FitnesseProcess (@NotNull final AgentRunningBuild build, @NotNull final BuildRunnerContext context){
         Context = context;
         Logger = build.getBuildLogger();
         ResultsProcessor = ResultsProcessorFactory.getProcessor(Logger);
+        Port = -1;
     }
 
     private String getParameter(@NotNull final String parameterName) {
@@ -133,7 +136,14 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return GetServerResponseCode() == 200 ;
     }
 
-    private int getPort() throws IllegalArgumentException {
+    private int getPort() {
+        if (this.Port == -1) {
+            this.Port = detectPort();
+        }	
+        return this.Port;
+    }
+
+    private int detectPort() throws IllegalArgumentException {
         String portText = getParameter(Util.PROPERTY_FITNESSE_PORT);
         if (portText.contains("-")) {
             // We have a range of ports
