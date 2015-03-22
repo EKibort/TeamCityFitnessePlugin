@@ -143,7 +143,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return this.Port;
     }
 
-    private int detectPort() {
+    private int detectPort() throws IllegalArgumentException {
         String portText = getParameter(Util.PROPERTY_FITNESSE_PORT);
         if (portText.contains("-")) {
             // We have a range of ports
@@ -151,17 +151,32 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             if (portsArr.length == 2) {
                 int portFrom = Integer.parseInt(portsArr[0]);
                 int portTo = Integer.parseInt(portsArr[1]);
-                Random random = new Random();
-                // Try and find an available port in the range given
-                int port = random.nextInt(portTo - portFrom) + portFrom;
-                while (!isPortAvailable(port)) {
-                    port = random.nextInt(portTo - portFrom) + portFrom;
+                int portCount = portTo - portFrom;
+                if (portCount > 0) {
+                    Random random = new Random();
+                    // Try and find an available port in the range given
+                    int port = random.nextInt(portTo - portFrom + 1) + portFrom;
+                    int portsTried = 1;
+                    while (!isPortAvailable(port)) {
+                        port = port + 1;
+                        if (port > portTo) {
+                            port = portFrom;
+                        }
+
+                        portsTried = portsTried + 1;
+                        if (portsTried > portCount) {
+                            throw new IllegalArgumentException(String.format("No available ports found in range %s. Tried %d ports.", portText, portsTried));
+                        }
+                    }
+                    return port;
                 }
-                return port;
             }
+
+            throw new IllegalArgumentException(String.format("Illegal port range (%s): must be in the format portFrom-portTo e.g. 8000-8100 and portFrom must be less than portTo. Alternatively just supply a single port e.g. 8000", portText));
         }
         return Integer.parseInt(portText);
     }
+
 
     private boolean isPortAvailable(int port) {
         try {
