@@ -31,9 +31,9 @@
             <label for="fitnesseTest">Test or suite relative url </label>
         </th>
         <td>
-            <props:textProperty name="fitnesseTest" />
+            <props:textProperty name="fitnesseTest" className="longField"/>
             <span class="error" id="error_fitnesseTest"></span>
-            <span class="smallNote">TestSuite.SubSuite?suite or TestSuite.SuperTest?test</span>
+            <span class="smallNote">TestSuite.SubSuite?suite,TestSuite.SubSuite?suite;TestSuite.SubSuite?suite,TestSuite.SubSuite?suite or TestSuite.SuperTest?test</span>
         </td>
     </tr>
 </l:settingsGroup>
