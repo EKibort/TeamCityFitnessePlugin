@@ -41,9 +41,8 @@
             <label for="fitnesseTest">Run tests or suites in parallel </label>
         </th>
         <td>
-            <props:textProperty name="fitnesseTestRunParallel" />
+            <props:checkboxProperty name="fitnesseTestRunParallel" />
             <span class="error" id="error_fitnesseTestRunParallel"></span>
-            <span class="smallNote">false or true</span>
         </td>
     </tr>
 </l:settingsGroup>
