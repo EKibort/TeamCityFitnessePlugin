@@ -36,4 +36,14 @@
             <span class="smallNote">TestSuite.SubSuite?suite or TestSuite.SuperTest?test</span>
         </td>
     </tr>
+    <tr>
+        <th>
+            <label for="fitnesseTest">Run test or suite in parallel </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseTestRunParallel" />
+            <span class="error" id="error_fitnesseTestRunParallel"></span>
+            <span class="smallNote">false or true</span>
+        </td>
+    </tr>
 </l:settingsGroup>

@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class FitnesseProcess extends  FutureBasedBuildProcess {
 
@@ -147,6 +148,11 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return testsRelUrls;
     }
 
+    private boolean getRunInParallelParameterValue(){
+        String parameterValue = getParameter(Util.PROPERTY_FITNESSE_TEST_RUN_PARALLEL);
+        return Boolean.parseBoolean(parameterValue);
+    }
+
     private URL getFitnesseRootUrl()throws MalformedURLException {
         return new URL(String.format("%s:%d/",LOCAL_URL, getPort()));
     }
@@ -156,10 +162,40 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return new URL(String.format("%s%s&format=xml",getFitnesseRootUrl(), relUrl));
     }
 
-    private void runSuites(Collection<String> relTestUrls) throws Exception {
-        //TODO Support running multiple tests in parallel
+    private void runSuites(Collection<String> relTestUrls, Boolean runInParallel) throws Exception {
+        if(runInParallel)
+            runSuitesAsync(relTestUrls);
+        else
+            runSuitesSync(relTestUrls);
+    }
+
+    private void runSuitesSync(Collection<String> relTestUrls) throws Exception {
         for (String relTestUrl : relTestUrls) {
             getSuiteResults(relTestUrl);
+        }
+    }
+
+    private void runSuitesAsync(Collection<String> relTestUrls) throws Exception {
+        List<Thread> allThreads = new ArrayList<Thread>();
+
+        for (final String relTestUrl : relTestUrls) {
+            Thread thread = new Thread() {
+                public void run() {
+                    try {
+                        Logger.progressMessage("Starting " + relTestUrl);
+                        getSuiteResults(relTestUrl);
+                    } catch (Exception ex) {
+                        Logger.progressMessage(ex.toString());
+                        Logger.exception(ex);
+                    }
+                }
+            };
+            thread.start();
+            allThreads.add(thread);
+        }
+
+        for (Thread thread : allThreads) {
+            thread.join();
         }
     }
 
@@ -186,9 +222,13 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             try {
                 fitProcess = runFitnesseInstance();
 
+                Boolean runInParallel = getRunInParallelParameterValue();
+                if(runInParallel) Logger.message("Tests will be run in parallel");
+
                 Logger.progressMessage("Fitnesse ran");
+
                 if (waitWhileUnpackingByCode()) {
-                    runSuites(testsSuitesToRun);
+                    runSuites(testsSuitesToRun, runInParallel);
 
                     Logger.progressMessage("terminating");
                 }
