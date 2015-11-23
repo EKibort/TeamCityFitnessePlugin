@@ -38,7 +38,7 @@
     </tr>
     <tr>
         <th>
-            <label for="fitnesseTest">Run test or suite in parallel </label>
+            <label for="fitnesseTest">Run tests or suites in parallel </label>
         </th>
         <td>
             <props:textProperty name="fitnesseTestRunParallel" />
