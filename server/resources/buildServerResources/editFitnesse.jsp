@@ -31,17 +31,18 @@
             <label for="fitnesseTest">Test or suite relative url </label>
         </th>
         <td>
-            <props:textProperty name="fitnesseTest" />
+            <props:textProperty name="fitnesseTest" className="longField" expandable="true" />
             <span class="error" id="error_fitnesseTest"></span>
-            <span class="smallNote">TestSuite.SubSuite?suite or TestSuite.SuperTest?test</span>
+            <span class="smallNote">List of suites or tests delimited by semicolon e.g. TestSuite.SubSuite1?suite;TestSuite.SubSuite2?suite or TestSuite.SuperTest?test</span>
         </td>
     </tr>
     <tr>
         <th>
-            <label for="fitnesseTest">Run tests or suites in parallel </label>
+            <label for="fitnesseTestRunParallel">Parallel execution </label>
         </th>
         <td>
             <props:checkboxProperty name="fitnesseTestRunParallel" />
+			<label for="fitnesseTestRunParallel">Run tests or suites in parallel</label>
             <span class="error" id="error_fitnesseTestRunParallel"></span>
         </td>
     </tr>
