@@ -13,6 +13,7 @@ public class Util {
 
   public final static String PROPERTY_FITNESSE_PORT = "fitnessePort";
   public final static String PROPERTY_FITNESSE_TEST = "fitnesseTest";
+  public final static String PROPERTY_FITNESSE_TEST_RUN_PARALLEL = "fitnesseTestRunParallel";
 
 
   public static String join(Collection<?> s) {
