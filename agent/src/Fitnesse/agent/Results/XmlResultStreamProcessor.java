@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.net.URL;
 
 public class XmlResultStreamProcessor implements ResultsStreamProcessor {
 
@@ -22,7 +21,7 @@ public class XmlResultStreamProcessor implements ResultsStreamProcessor {
         this.TempDir = tempDir;
     }
 
-    public void ProcessStream(InputStream stream, URL url) {
+    public void ProcessStream(InputStream stream) {
         BufferedWriter reportWriter = null;
         try
         {
@@ -33,7 +32,6 @@ public class XmlResultStreamProcessor implements ResultsStreamProcessor {
             {
                 reportWriter = new BufferedWriter(new FileWriter(reportFile));
                 Logger.message("Writing results to temp file: "+reportFile.getAbsolutePath());
-	    resultsMap.put("suiteUrl", url.getPath());
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(stream));
                 Pattern testNamePattern = Pattern.compile("<a href=\\\"(.*?)\\\"\\sid=\\\".*?\\\"\\sclass=\\\"test_name\\\">");

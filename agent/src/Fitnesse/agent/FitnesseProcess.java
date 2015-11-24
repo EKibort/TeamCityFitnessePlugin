@@ -83,7 +83,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Logger.progressMessage(String.format("Connected: '%d/%s'", connection.getResponseCode(), connection.getResponseMessage()));
 
             inputStream = connection.getInputStream();
-            ResultsProcessor.ProcessStream(inputStream , pageCmdTarget);
+            ResultsProcessor.ProcessStream(inputStream );
         }
         catch (Exception ex) {
             Logger.exception(ex);
