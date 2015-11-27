@@ -27,15 +27,15 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     private final BuildRunnerContext Context;
     @NotNull
     private final BuildProgressLogger Logger;
-    @NotNull
-    private  final ResultsStreamProcessor ResultsProcessor;
-
 
 
     public FitnesseProcess (@NotNull final AgentRunningBuild build, @NotNull final BuildRunnerContext context){
         Context = context;
         Logger = build.getBuildLogger();
-        ResultsProcessor = ResultsProcessorFactory.getProcessor(Logger, Context.getBuild().getBuildTempDirectory());
+    }
+
+    private ResultsStreamProcessor getResultsProcessor(String suiteName){
+        return ResultsProcessorFactory.getProcessor(Logger.getThreadLogger(), Context.getBuild().getBuildTempDirectory(), suiteName);
     }
 
     private String getParameter(@NotNull final String parameterName) {
@@ -83,7 +83,9 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             Logger.progressMessage(String.format("Connected: '%d/%s'", connection.getResponseCode(), connection.getResponseMessage()));
 
             inputStream = connection.getInputStream();
-            ResultsProcessor.ProcessStream(inputStream );
+
+            ResultsStreamProcessor resultsProcessor = getResultsProcessor(suiteName);
+            resultsProcessor.ProcessStream(inputStream );
         }
         catch (Exception ex) {
             Logger.exception(ex);
@@ -97,7 +99,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                     Logger.exception(e);
                 }
             }
-            Logger.logSuiteFinished(suiteName);
         }
     }
 

@@ -8,24 +8,21 @@ import java.util.Date;
 
 public class TeamCityResultReporter implements ResultReporter {
     private final BuildProgressLogger Logger;
+    private final String SuiteName;
 
-    public TeamCityResultReporter(BuildProgressLogger logger) {
+    public TeamCityResultReporter(BuildProgressLogger logger, String suiteName) {
         this.Logger = logger;
+        this.SuiteName = suiteName;
     }
 
     public void StartRunning()
     {
-        Logger.logSuiteStarted("FitNesse");
+        Logger.logSuiteStarted(SuiteName);
     }
 
-    public void FinishRunning()
-    {
-        Logger.logSuiteFinished("FitNesse");
-    }
+    public void FinishRunning() { Logger.logSuiteFinished(SuiteName); }
 
-    public void Start(String testName) {
-        Logger.logTestStarted(testName);
-    }
+    public void Start(String testName) { Logger.logTestStarted(testName); }
 
     public void Finish(FitnesseResult result) {
         String testName = result.getHistoryLink();
