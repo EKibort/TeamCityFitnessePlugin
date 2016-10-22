@@ -3,10 +3,7 @@ package Fitnesse.agent;
 import Fitnesse.agent.Results.ResultsProcessorFactory;
 import Fitnesse.agent.Results.ResultsStreamProcessor;
 import Fitnesse.common.Util;
-import jetbrains.buildServer.agent.AgentRunningBuild;
-import jetbrains.buildServer.agent.BuildFinishedStatus;
-import jetbrains.buildServer.agent.BuildProgressLogger;
-import jetbrains.buildServer.agent.BuildRunnerContext;
+import jetbrains.buildServer.agent.*;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -34,8 +31,8 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         Logger = build.getBuildLogger();
     }
 
-    private ResultsStreamProcessor getResultsProcessor(String suiteName){
-        return ResultsProcessorFactory.getProcessor(Logger.getThreadLogger(), Context.getBuild().getBuildTempDirectory(), suiteName);
+    private ResultsStreamProcessor getResultsProcessor(String suiteName, FlowLogger logger){
+        return ResultsProcessorFactory.getProcessor(logger, Context.getBuild().getBuildTempDirectory(), suiteName);
     }
 
     private String getParameter(@NotNull final String parameterName) {
@@ -73,22 +70,22 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     }
 
 
-    public void  getSuiteResults(String relUrl) throws MalformedURLException {
+    public void  getSuiteResults(String relUrl, FlowLogger logger) throws MalformedURLException {
         URL pageCmdTarget = getTestAbsoluteUrl(relUrl);
         InputStream  inputStream =null;
         String suiteName = String.format("Fitnesse %s", relUrl);
         try {
-            Logger.progressMessage(String.format("Connecting to '%s'", pageCmdTarget));
+            logger.progressMessage(String.format("Connecting to '%s'", pageCmdTarget));
             HttpURLConnection connection = (HttpURLConnection) pageCmdTarget.openConnection();
-            Logger.progressMessage(String.format("Connected: '%d/%s'", connection.getResponseCode(), connection.getResponseMessage()));
+            logger.progressMessage(String.format("Connected: '%d/%s'", connection.getResponseCode(), connection.getResponseMessage()));
 
             inputStream = connection.getInputStream();
 
-            ResultsStreamProcessor resultsProcessor = getResultsProcessor(suiteName);
+            ResultsStreamProcessor resultsProcessor = getResultsProcessor(suiteName, logger);
             resultsProcessor.ProcessStream(inputStream );
         }
         catch (Exception ex) {
-            Logger.exception(ex);
+            logger.exception(ex);
         }
         finally {
             if (inputStream != null){
@@ -96,7 +93,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                     inputStream.close();
                 }
                 catch (Exception e){
-                    Logger.exception(e);
+                    logger.exception(e);
                 }
             }
         }
@@ -172,7 +169,7 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
     private void runSuitesSync(Collection<String> relTestUrls) throws Exception {
         for (String relTestUrl : relTestUrls) {
-            getSuiteResults(relTestUrl);
+            getSuiteResults(relTestUrl,Logger.getFlowLogger(relTestUrl));
         }
     }
 
@@ -182,12 +179,13 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         for (final String relTestUrl : relTestUrls) {
             Thread thread = new Thread() {
                 public void run() {
+                    FlowLogger logger = Logger.getFlowLogger(relTestUrl);
                     try {
-                        Logger.progressMessage("Starting " + relTestUrl);
-                        getSuiteResults(relTestUrl);
+                        logger.progressMessage("Starting " + relTestUrl);
+                        getSuiteResults(relTestUrl,logger);
                     } catch (Exception ex) {
-                        Logger.progressMessage(ex.toString());
-                        Logger.exception(ex);
+                        logger.progressMessage(ex.toString());
+                        logger.exception(ex);
                     }
                 }
             };
