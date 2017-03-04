@@ -46,4 +46,15 @@
             <span class="error" id="error_fitnesseTestRunParallel"></span>
         </td>
     </tr>
+    <tr>
+        <th>
+            <label for="fitnesseJavaParam">Java parameters: </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseJavaParam" />
+            <span class="error" id="error_fitnesseJavaParam"></span>
+            <span class="smallNote">additional java parameters like -DVARIABLE=value</span>
+        </td>
+    </tr>
+
 </l:settingsGroup>
