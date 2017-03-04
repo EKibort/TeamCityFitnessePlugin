@@ -10,11 +10,13 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ServerSocket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 public class FitnesseProcess extends  FutureBasedBuildProcess {
 
@@ -25,10 +27,13 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     @NotNull
     private final BuildProgressLogger Logger;
 
+    private int Port;
+
 
     public FitnesseProcess (@NotNull final AgentRunningBuild build, @NotNull final BuildRunnerContext context){
         Context = context;
         Logger = build.getBuildLogger();
+        Port = -1;
     }
 
     private ResultsStreamProcessor getResultsProcessor(String suiteName, FlowLogger logger){
@@ -80,7 +85,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             logger.progressMessage(String.format("Connected: '%d/%s'", connection.getResponseCode(), connection.getResponseMessage()));
 
             inputStream = connection.getInputStream();
-
             ResultsStreamProcessor resultsProcessor = getResultsProcessor(suiteName, logger);
             resultsProcessor.ProcessStream(inputStream );
         }
@@ -131,7 +135,44 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     }
 
     private int getPort() {
-        return Integer.parseInt(getParameter(Util.PROPERTY_FITNESSE_PORT));
+        if (this.Port == -1) {
+            this.Port = detectPort();
+        }	
+        return this.Port;
+    }
+
+    private int detectPort() {
+        String portText = getParameter(Util.PROPERTY_FITNESSE_PORT);
+        if (portText.contains("-")) {
+            // We have a range of ports
+            String[] portsArr = portText.split("-");
+            if (portsArr.length == 2) {
+                int portFrom = Integer.parseInt(portsArr[0]);
+                int portTo = Integer.parseInt(portsArr[1]);
+                Random random = new Random();
+                // Try and find an available port in the range given
+                int port = random.nextInt(portTo - portFrom) + portFrom;
+                while (!isPortAvailable(port)) {
+                    port = random.nextInt(portTo - portFrom) + portFrom;
+                }
+                return port;
+            }
+        }
+        return Integer.parseInt(portText);
+    }
+
+    private boolean isPortAvailable(int port) {
+        try {
+            ServerSocket socket = new ServerSocket(port);
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                // Ignore IOException on close()
+                }
+                return true;
+        } catch (IOException ex) {
+            return false;
+            }
     }
 
     private Collection<String> getTestRelativeUrls() {
@@ -213,7 +254,6 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         }
 
         try {
-            //TODO Support detecting free port in range
             //TODO detect fitnesse version
             //TODO add http timeout
             Process fitProcess = null;
