@@ -3,10 +3,7 @@ package Fitnesse.agent;
 import Fitnesse.agent.Results.ResultsProcessorFactory;
 import Fitnesse.agent.Results.ResultsStreamProcessor;
 import Fitnesse.common.Util;
-import jetbrains.buildServer.agent.AgentRunningBuild;
-import jetbrains.buildServer.agent.BuildFinishedStatus;
-import jetbrains.buildServer.agent.BuildProgressLogger;
-import jetbrains.buildServer.agent.BuildRunnerContext;
+import jetbrains.buildServer.agent.*;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -18,6 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 public class FitnesseProcess extends  FutureBasedBuildProcess {
@@ -28,18 +26,18 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     private final BuildRunnerContext Context;
     @NotNull
     private final BuildProgressLogger Logger;
-    @NotNull
-    private  final ResultsStreamProcessor ResultsProcessor;
 
     private int Port;
-
 
 
     public FitnesseProcess (@NotNull final AgentRunningBuild build, @NotNull final BuildRunnerContext context){
         Context = context;
         Logger = build.getBuildLogger();
-        ResultsProcessor = ResultsProcessorFactory.getProcessor(Logger);
         Port = -1;
+    }
+
+    private ResultsStreamProcessor getResultsProcessor(String suiteName, FlowLogger logger){
+        return ResultsProcessorFactory.getProcessor(logger, Context.getBuild().getBuildTempDirectory(), suiteName);
     }
 
     private String getParameter(@NotNull final String parameterName) {
@@ -77,20 +75,21 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
     }
 
 
-    public void  getSuiteResults(String relUrl) throws MalformedURLException {
+    public void  getSuiteResults(String relUrl, FlowLogger logger) throws MalformedURLException {
         URL pageCmdTarget = getTestAbsoluteUrl(relUrl);
         InputStream  inputStream =null;
         String suiteName = String.format("Fitnesse %s", relUrl);
         try {
-            Logger.progressMessage(String.format("Connecting to '%s'", pageCmdTarget));
+            logger.progressMessage(String.format("Connecting to '%s'", pageCmdTarget));
             HttpURLConnection connection = (HttpURLConnection) pageCmdTarget.openConnection();
-            Logger.progressMessage(String.format("Connected: '%d/%s'", connection.getResponseCode(), connection.getResponseMessage()));
+            logger.progressMessage(String.format("Connected: '%d/%s'", connection.getResponseCode(), connection.getResponseMessage()));
 
             inputStream = connection.getInputStream();
-            ResultsProcessor.ProcessStream(inputStream , pageCmdTarget);
+            ResultsStreamProcessor resultsProcessor = getResultsProcessor(suiteName, logger);
+            resultsProcessor.ProcessStream(inputStream );
         }
         catch (Exception ex) {
-            Logger.exception(ex);
+            logger.exception(ex);
         }
         finally {
             if (inputStream != null){
@@ -98,10 +97,9 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
                     inputStream.close();
                 }
                 catch (Exception e){
-                    Logger.exception(e);
+                    logger.exception(e);
                 }
             }
-            Logger.logSuiteFinished(suiteName);
         }
     }
 
@@ -189,19 +187,55 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
         return testsRelUrls;
     }
 
+    private boolean getRunInParallelParameterValue(){
+        String parameterValue = getParameter(Util.PROPERTY_FITNESSE_TEST_RUN_PARALLEL);
+        return Boolean.parseBoolean(parameterValue);
+    }
+
     private URL getFitnesseRootUrl()throws MalformedURLException {
         return new URL(String.format("%s:%d/",LOCAL_URL, getPort()));
     }
 
     private URL getTestAbsoluteUrl(String relUrl) throws MalformedURLException {
 
-        return new URL(String.format("%s%s&format=xml",getFitnesseRootUrl(), relUrl));
+        return new URL(String.format("%s%s",getFitnesseRootUrl(), relUrl));
     }
 
-    private void runSuites(Collection<String> relTestUrls) throws Exception {
-        //TODO Support running multiple tests in parallel
+    private void runSuites(Collection<String> relTestUrls, Boolean runInParallel) throws Exception {
+        if(runInParallel)
+            runSuitesAsync(relTestUrls);
+        else
+            runSuitesSync(relTestUrls);
+    }
+
+    private void runSuitesSync(Collection<String> relTestUrls) throws Exception {
         for (String relTestUrl : relTestUrls) {
-            getSuiteResults(relTestUrl);
+            getSuiteResults(relTestUrl,Logger.getFlowLogger(relTestUrl));
+        }
+    }
+
+    private void runSuitesAsync(Collection<String> relTestUrls) throws Exception {
+        List<Thread> allThreads = new ArrayList<Thread>();
+
+        for (final String relTestUrl : relTestUrls) {
+            Thread thread = new Thread() {
+                public void run() {
+                    FlowLogger logger = Logger.getFlowLogger(relTestUrl);
+                    try {
+                        logger.progressMessage("Starting " + relTestUrl);
+                        getSuiteResults(relTestUrl,logger);
+                    } catch (Exception ex) {
+                        logger.progressMessage(ex.toString());
+                        logger.exception(ex);
+                    }
+                }
+            };
+            thread.start();
+            allThreads.add(thread);
+        }
+
+        for (Thread thread : allThreads) {
+            thread.join();
         }
     }
 
@@ -227,9 +261,13 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
             try {
                 fitProcess = runFitnesseInstance();
 
+                Boolean runInParallel = getRunInParallelParameterValue();
+                if(runInParallel) Logger.message("Tests will be run in parallel");
+
                 Logger.progressMessage("Fitnesse ran");
+
                 if (waitWhileUnpackingByCode()) {
-                    runSuites(testsSuitesToRun);
+                    runSuites(testsSuitesToRun, runInParallel);
 
                     Logger.progressMessage("terminating");
                 }
