@@ -58,7 +58,33 @@ public class FitnesseProcess extends  FutureBasedBuildProcess {
 
     private String[] getFitnesseCmd() {
         File jarFitnesse = new File(getParameter("fitnesseJarPath"));
-        return new String[] {"java", "-jar", jarFitnesse.getAbsolutePath(), "-p", ""+getPort()};
+		ArrayList<String> cmdLine = new ArrayList<String>();
+		cmdLine.add("java");
+		cmdLine.add("-jar");
+		cmdLine.add(jarFitnesse.getAbsolutePath());
+		cmdLine.add("-p");
+		cmdLine.add(""+getPort());
+		
+		String rootFolder = getParameter("fitnesseRoot");
+		if (!(rootFolder == null || rootFolder.isEmpty() || rootFolder.trim().isEmpty())) {
+			cmdLine.add("-d");
+			cmdLine.add(rootFolder);
+		}
+		
+		String rootPageFolder = getParameter("fitnessePages");
+		if (!(rootPageFolder == null || rootPageFolder.isEmpty() || rootPageFolder.trim().isEmpty())) {
+			cmdLine.add("-r");
+			cmdLine.add(rootPageFolder);
+		}
+		
+		String fitnesseConfig = getParameter("fitnesseConfig");
+		if (!(fitnesseConfig == null || fitnesseConfig.isEmpty() || fitnesseConfig.trim().isEmpty())) {
+			cmdLine.add("-f");
+			cmdLine.add(fitnesseConfig);
+		}
+		
+		String[] cl = cmdLine.toArray(new String[cmdLine.size()]);
+		return cl'
     }
 
     private Process runFitnesseInstance() {

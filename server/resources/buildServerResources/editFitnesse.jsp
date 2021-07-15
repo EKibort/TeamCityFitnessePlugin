@@ -18,7 +18,7 @@
     </tr>
     <tr>
         <th>
-            <label for="fitnessePort">Port: </label>
+            <label for="fitnessePort">Port (-p): </label>
         </th>
         <td>
             <props:textProperty name="fitnessePort" />
@@ -34,6 +34,36 @@
             <props:textProperty name="fitnesseTest" className="longField" expandable="true" />
             <span class="error" id="error_fitnesseTest"></span>
             <span class="smallNote">List of suites or tests delimited by semicolon e.g. TestSuite.SubSuite1?suite;TestSuite.SubSuite2?suite or TestSuite.SuperTest?test</span>
+        </td>
+    </tr>
+	<tr class="advancedSetting">
+        <th>
+            <label for="fitnesseRoot">Test root folder: </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseRoot" />
+            <span class="error" id="error_fitnesseRoot"></span>
+			<span class="smallNote">The directory in which FitNesse will start the SLIM or Fit test runners. (-d option)</span>
+        </td>
+    </tr>
+	<tr class="advancedSetting">
+        <th>
+            <label for="fitnessePages">Page root folder: </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnessePages" />
+            <span class="error" id="error_fitnessePages"></span>
+			<span class="smallNote">The directory in which FitNesse looks for top level wiki pages. (-r option)</span>
+        </td>
+    </tr>
+	<tr class="advancedSetting">
+        <th>
+            <label for="fitnesseConfig">Config file: </label>
+        </th>
+        <td>
+            <props:textProperty name="fitnesseConfig" />
+            <span class="error" id="error_fitnesseConfig"></span>
+			<span class="smallNote">Load an alternative configuration file. (-f option)</span>
         </td>
     </tr>
     <tr>
